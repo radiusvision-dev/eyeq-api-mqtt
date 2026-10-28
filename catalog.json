@@ -1,0 +1,6637 @@
+{
+  "title": "EyeQ API and MQTT",
+  "system": "EyeQ Spectrum Systems",
+  "edition": "2026-10-28",
+  "https": [
+    {
+      "method": "GET",
+      "path": "/appliance-api/feature-modules",
+      "mqtt": [
+        {
+          "operation": "get-feature-modules",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.info.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "feature modules"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/feature-modules",
+      "mqtt": [
+        {
+          "operation": "post-feature-modules",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.features.manage",
+      "actions": [
+        "activate",
+        "deactivate",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "id",
+        "module"
+      ],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "feature modules",
+      "action_fields": {
+        "status": [
+          "sessionId",
+          "session_id"
+        ],
+        "activate": [
+          "applyToSpectrum",
+          "restart"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/hailo-model-zoo",
+      "mqtt": [
+        {
+          "operation": "get-hailo-model-zoo",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "hailo model zoo"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/hailo-model-zoo",
+      "mqtt": [
+        {
+          "operation": "post-hailo-model-zoo",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [
+        "activate",
+        "apply-active",
+        "apply-packaged-custom",
+        "download",
+        "preflight"
+      ],
+      "fields": [
+        "action",
+        "forceAlpr",
+        "forceLicensePlateOcr",
+        "forceRealInference",
+        "id",
+        "modelId",
+        "restart"
+      ],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "hailo model zoo",
+      "action_fields": {
+        "activate": [
+          "applyToSpectrum",
+          "restart"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/hailo-plugin/settings",
+      "mqtt": [
+        {
+          "operation": "post-hailo-plugin-settings",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [
+        "optimize-workload"
+      ],
+      "fields": [
+        "action",
+        "alprFrameStride",
+        "disableChainsWithoutOcr",
+        "disableNonAlprRealInference",
+        "nonAlprFrameStride",
+        "restart"
+      ],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "settings"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/hailo-plugin/status",
+      "mqtt": [
+        {
+          "operation": "get-hailo-plugin-status",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "status"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/hailo-taxonomy",
+      "mqtt": [
+        {
+          "operation": "get-hailo-taxonomy",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "hailo taxonomy"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/hailo-taxonomy",
+      "mqtt": [
+        {
+          "operation": "post-hailo-taxonomy",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [
+        "publish",
+        "restart-spectrum"
+      ],
+      "fields": [
+        "action",
+        "modelId",
+        "name",
+        "objectTypes",
+        "objects",
+        "packId"
+      ],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "hailo taxonomy"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/model-chains",
+      "mqtt": [
+        {
+          "operation": "get-model-chains",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "model chains"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/model-chains",
+      "mqtt": [
+        {
+          "operation": "models",
+          "available": true
+        },
+        {
+          "operation": "post-model-chains",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [
+        "evaluate-context",
+        "reset-default",
+        "run-automation-once",
+        "run-context",
+        "save",
+        "validate"
+      ],
+      "fields": [
+        "action",
+        "confirm",
+        "executeAudio",
+        "executeRelays",
+        "graph",
+        "updateState"
+      ],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "model chains",
+      "action_fields": {
+        "save": [
+          "graph"
+        ],
+        "reset-default": [],
+        "validate": [
+          "graph"
+        ],
+        "run-automation-once": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/harvest",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "count",
+        "depth",
+        "harvest_mode",
+        "mode",
+        "url"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "harvest"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/health",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "DELETE",
+      "path": "/hailo-trainer-api/images/{image_id}",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "{image_id}"
+    },
+    {
+      "method": "DELETE",
+      "path": "/hailo-trainer-api/images/{image_id}/annotations",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "annotations"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/images/{image_id}/annotations",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "annotations"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/images/{image_id}/annotations",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id",
+        "boxes",
+        "split",
+        "training_set_ids",
+        "training_sets"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "annotations"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/images/{image_id}/file",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "file"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/images/{image_id}/infer",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id",
+        "confidence",
+        "model"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "infer"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/images/{image_id}/thumbnail",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "thumbnail"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/images/{image_id}/training-sets",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image_id",
+        "training_set_ids",
+        "training_sets"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "training sets"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/jobs/{job_type}",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "job_type"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "{job_type}"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/models",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "models"
+    },
+    {
+      "method": "DELETE",
+      "path": "/hailo-trainer-api/models/{model_id}",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "model_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "{model_id}"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/models/{model_id}/metadata",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "model_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "metadata"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/models/{model_id}/rename",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "model_id",
+        "name"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "rename"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/settings",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "settings"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/settings",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "settings"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/state",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "state"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/training-data",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "training data"
+    },
+    {
+      "method": "GET",
+      "path": "/hailo-trainer-api/training-sets",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "training sets"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/training-sets",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "description",
+        "name"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "training sets"
+    },
+    {
+      "method": "DELETE",
+      "path": "/hailo-trainer-api/training-sets/{set_id}",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "set_id"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "{set_id}"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/training-sets/{set_id}/rename",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "set_id",
+        "description",
+        "name"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "rename"
+    },
+    {
+      "method": "POST",
+      "path": "/hailo-trainer-api/upload",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "image",
+        "source",
+        "camera_id",
+        "source_label",
+        "captured_at",
+        "resolution"
+      ],
+      "actions": [],
+      "scope": "ai6:models",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "name": "upload"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access",
+      "mqtt": [
+        {
+          "operation": "get-access",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "physical access"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/audit/export",
+      "mqtt": [
+        {
+          "operation": "post-access-audit-export",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.audit.export",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "export"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/commission",
+      "mqtt": [
+        {
+          "operation": "post-access-commission",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.commission",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "commission"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration",
+      "mqtt": [
+        {
+          "operation": "get-access-configuration",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "configuration"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/doors",
+      "mqtt": [
+        {
+          "operation": "post-access-configuration-doors",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.configuration.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "operation",
+        "request_id",
+        "resource_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "doors"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/groups",
+      "mqtt": [
+        {
+          "operation": "post-access-configuration-groups",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.policy.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "operation",
+        "request_id",
+        "resource_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "groups"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/inventory",
+      "mqtt": [
+        {
+          "operation": "get-access-configuration-inventory",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "inventory"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/reader-readiness",
+      "mqtt": [
+        {
+          "operation": "get-access-configuration-reader-readiness",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "reader readiness"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/readers",
+      "mqtt": [
+        {
+          "operation": "post-access-configuration-readers",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.configuration.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "operation",
+        "request_id",
+        "resource_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "readers"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/schedule-status",
+      "mqtt": [
+        {
+          "operation": "get-access-configuration-schedule-status",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "schedule status"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/schedules",
+      "mqtt": [
+        {
+          "operation": "post-access-configuration-schedules",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.policy.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "operation",
+        "request_id",
+        "resource_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "schedules"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/timezones",
+      "mqtt": [
+        {
+          "operation": "post-access-configuration-timezones",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.policy.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "operation",
+        "request_id",
+        "resource_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "timezones"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connect",
+      "mqtt": [
+        {
+          "operation": "post-access-connect",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.commission",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "username",
+        "password"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "connect"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/connectors/storeganise",
+      "mqtt": [
+        {
+          "operation": "get-access-connectors-storeganise",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.connectors.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "storeganise"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/configuration",
+      "mqtt": [
+        {
+          "operation": "post-access-connectors-storeganise-configuration",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.connectors.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "configuration"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/refresh",
+      "mqtt": [
+        {
+          "operation": "post-access-connectors-storeganise-refresh",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.connectors.sync",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "refresh"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/validate",
+      "mqtt": [
+        {
+          "operation": "post-access-connectors-storeganise-validate",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.connectors.test",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "revision",
+        "spec"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "validate"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/controllers",
+      "mqtt": [
+        {
+          "operation": "get-access-controllers",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "controllers"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/collector",
+      "mqtt": [
+        {
+          "operation": "post-access-controllers-collector",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.controllers.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "username",
+        "password",
+        "confirm_persistent_storage"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "collector"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/register",
+      "mqtt": [
+        {
+          "operation": "post-access-controllers-register",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.controllers.manage",
+      "actions": [],
+      "fields": [
+        "site_id",
+        "verification_id",
+        "request_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "register"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/verify",
+      "mqtt": [
+        {
+          "operation": "post-access-controllers-verify",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.controllers.manage",
+      "actions": [],
+      "fields": [
+        "site_id",
+        "name",
+        "host",
+        "serial",
+        "certificate_sha256",
+        "username",
+        "password"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "verify"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/{controller_id}/factory-reset",
+      "mqtt": [
+        {
+          "operation": "post-access-controller-factory-reset",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.factory.reset",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "factory reset"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/{controller_id}/firmware",
+      "mqtt": [
+        {
+          "operation": "post-access-controller-firmware",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.firmware.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "firmware"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/credentials",
+      "mqtt": [
+        {
+          "operation": "get-access-credentials",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "credentials"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/enroll",
+      "mqtt": [
+        {
+          "operation": "post-access-credentials-enroll",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "kind",
+        "value"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "enroll"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/pin/change",
+      "mqtt": [
+        {
+          "operation": "post-access-credentials-pin-change",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "credential_id",
+        "value"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "change"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/pin/reveal",
+      "mqtt": [
+        {
+          "operation": "post-access-credentials-pin-reveal",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "credential_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "reveal"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/revoke",
+      "mqtt": [
+        {
+          "operation": "post-access-credentials-revoke",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "credential_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "revoke"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/discovery",
+      "mqtt": [
+        {
+          "operation": "post-access-discovery",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.commission",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "discovery"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors",
+      "mqtt": [
+        {
+          "operation": "get-access-doors",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "doors"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/doors/{door_id}/commands",
+      "mqtt": [
+        {
+          "operation": "post-access-door-command",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.doors.operate",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "commands"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/events",
+      "mqtt": [
+        {
+          "operation": "get-access-events",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.events.view",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "after"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "events"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/events/sync",
+      "mqtt": [
+        {
+          "operation": "post-access-events-sync",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.events.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "sync"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/history",
+      "mqtt": [
+        {
+          "operation": "get-access-history",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.events.view",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "person_id",
+        "after",
+        "limit"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "history"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/identifiers",
+      "mqtt": [
+        {
+          "operation": "post-access-identifiers",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.identifiers.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "identifiers"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/people",
+      "mqtt": [
+        {
+          "operation": "get-access-people",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.people.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "people"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people",
+      "mqtt": [
+        {
+          "operation": "post-access-people",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.people.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "name",
+        "address",
+        "phone",
+        "email",
+        "custom_fields"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "people"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people/provision",
+      "mqtt": [
+        {
+          "operation": "post-access-people-provision",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.people.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "person_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "provision"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/people/{person_id}",
+      "mqtt": [
+        {
+          "operation": "get-access-person",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.people.view",
+      "actions": [],
+      "fields": [
+        "person_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "{person id}"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/policies",
+      "mqtt": [
+        {
+          "operation": "post-access-policies",
+          "available": false
+        }
+      ],
+      "available": false,
+      "permission": "pacs.policy.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "policies"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/shared",
+      "mqtt": [
+        {
+          "operation": "get-access-shared",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.people.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "shared"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/activate",
+      "mqtt": [
+        {
+          "operation": "post-access-shared-activate",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.access.grant",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "assignment_id",
+        "confirm",
+        "request_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "activate"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/groups",
+      "mqtt": [
+        {
+          "operation": "post-access-shared-groups",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.policy.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "name",
+        "targets",
+        "request_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "groups"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/revoke",
+      "mqtt": [
+        {
+          "operation": "post-access-shared-revoke",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "assignment_id",
+        "confirm",
+        "request_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "revoke"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/stage",
+      "mqtt": [
+        {
+          "operation": "post-access-shared-stage",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "fields": [
+        "controller_id",
+        "person_id",
+        "group_id",
+        "kind",
+        "value",
+        "source_credential_id",
+        "request_id"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "stage"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/wireless-readers",
+      "mqtt": [
+        {
+          "operation": "get-access-wireless-readers",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "wireless readers"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/wireless-readers/catalog",
+      "mqtt": [
+        {
+          "operation": "get-access-wireless-readers-catalog",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "catalog"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/commission",
+      "mqtt": [
+        {
+          "operation": "post-access-wireless-readers-commission",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.configuration.manage",
+      "actions": [],
+      "fields": [
+        "access_point",
+        "controller_id",
+        "door",
+        "mode",
+        "node",
+        "source"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "commission"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/configure",
+      "mqtt": [
+        {
+          "operation": "post-access-wireless-readers-configure",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.configuration.manage",
+      "actions": [],
+      "fields": [
+        "access_point",
+        "controller_id",
+        "door",
+        "mode",
+        "node",
+        "source"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "configure"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/disable",
+      "mqtt": [
+        {
+          "operation": "post-access-wireless-readers-disable",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "pacs.configuration.manage",
+      "actions": [],
+      "fields": [
+        "access_point",
+        "controller_id",
+        "door",
+        "mode",
+        "node",
+        "source"
+      ],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "disable"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/access/logout",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "logout"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/access/me",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "me"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/agent-delegations",
+      "fields": [],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "agent delegations"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/agent-delegations",
+      "fields": [
+        "enabled",
+        "id",
+        "pacs_scope",
+        "permissions",
+        "pin_admin"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "agent delegations"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai6-agent-access",
+      "mqtt": [
+        {
+          "operation": "get-ai6-agent-access",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Authentication",
+      "authentication": "Bearer token",
+      "name": "ai6 agent access"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/ai6-agent-access",
+      "mqtt": [
+        {
+          "operation": "post-ai6-agent-access",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [
+        "create-grant",
+        "revoke-grant",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "agentName",
+        "agentType",
+        "allowedApiTargets",
+        "expiresInHours",
+        "grantId",
+        "notes",
+        "purpose",
+        "reason",
+        "scopes"
+      ],
+      "scope": "ai6:control",
+      "category": "Authentication",
+      "authentication": "Bearer token",
+      "name": "ai6 agent access",
+      "action_fields": {
+        "status": [],
+        "create-grant": [
+          "agentName",
+          "agentType",
+          "allowedApiTargets",
+          "expiresInHours",
+          "notes",
+          "purpose",
+          "scopes"
+        ],
+        "revoke-grant": [
+          "grantId",
+          "reason"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/user-access",
+      "mqtt": [
+        {
+          "operation": "get-user-access",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.users.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "user access"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/user-access",
+      "mqtt": [
+        {
+          "operation": "post-user-access",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.users.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Authentication",
+      "authentication": "Administrator session",
+      "name": "user access"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/ai/access",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "channel"
+      ],
+      "actions": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "access"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/ai/mjpeg",
+      "mqtt": [
+        {
+          "operation": "get-av-ai-mjpeg",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [
+        "channel",
+        "duration",
+        "fps"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "mjpeg"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/ai/stream",
+      "mqtt": [
+        {
+          "operation": "post-av-ai-stream",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [
+        "ensure",
+        "establish",
+        "restart",
+        "start"
+      ],
+      "fields": [
+        "action",
+        "channel",
+        "stream_index",
+        "warm"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "stream",
+      "action_fields": {
+        "start": [
+          "count",
+          "pair_id"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/audio-library",
+      "mqtt": [
+        {
+          "operation": "get-av-audio-library",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "audio library"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/audio-library/save",
+      "mqtt": [
+        {
+          "operation": "post-av-audio-library-save",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.control",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "save"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/audio-library/upload",
+      "mqtt": [
+        {
+          "operation": "post-av-audio-library-upload",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "ave.control",
+      "actions": [],
+      "fields": [
+        "channel",
+        "deviceId",
+        "device_id",
+        "id",
+        "name"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "upload"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/camera-commission",
+      "mqtt": [
+        {
+          "operation": "post-av-camera-commission",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "action",
+        "channel",
+        "confirmAllowDxp",
+        "deviceId",
+        "device_id",
+        "from",
+        "id",
+        "local_ip",
+        "setupGuard"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "camera commission"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/camera-event",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "deviceId",
+        "device_id",
+        "event",
+        "metric",
+        "sensor",
+        "state",
+        "status",
+        "subtype",
+        "type",
+        "value"
+      ],
+      "actions": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "camera event"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/camera-event",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "deviceId",
+        "device_id",
+        "event",
+        "metric",
+        "sensor",
+        "state",
+        "status",
+        "subtype",
+        "type",
+        "value"
+      ],
+      "actions": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "camera event"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/camera-overlays",
+      "mqtt": [
+        {
+          "operation": "get-av-camera-overlays",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [
+        "device_id"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "camera overlays"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/camera-overlays",
+      "mqtt": [
+        {
+          "operation": "camera-overlays",
+          "available": true
+        },
+        {
+          "operation": "post-av-camera-overlays",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [
+        "apply-timeclock",
+        "apply-timeclock-all",
+        "probe",
+        "remove",
+        "set-dynamic-text",
+        "status",
+        "upsert-image"
+      ],
+      "fields": [
+        "action",
+        "align",
+        "background_color",
+        "background_opacity",
+        "camera",
+        "device_id",
+        "enabled",
+        "font_size",
+        "id",
+        "image_id",
+        "opacity",
+        "overlay_path",
+        "persist",
+        "pos",
+        "position",
+        "size",
+        "stream_key",
+        "text",
+        "text_color",
+        "text_index"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "camera overlays",
+      "action_fields": {
+        "status": [
+          "sessionId",
+          "session_id"
+        ],
+        "remove": [
+          "confirm",
+          "device_id"
+        ],
+        "set-dynamic-text": [
+          "text_index"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/channel",
+      "mqtt": [
+        {
+          "operation": "post-av-channel",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "channel",
+        "confirmManagedAudio",
+        "control_profile",
+        "control_profile_mode",
+        "control_profile_variant",
+        "copy_channel",
+        "discovered_id",
+        "file",
+        "friendly_name",
+        "label",
+        "managed_audio",
+        "media_id",
+        "name",
+        "provider",
+        "restart",
+        "secondary_source_url",
+        "snapshot_url",
+        "soft_buttons",
+        "source_file_path",
+        "source_url",
+        "stream_key",
+        "url",
+        "verified_output",
+        "verify"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "channel"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/channel-diagnostics",
+      "mqtt": [
+        {
+          "operation": "post-av-channel-diagnostics",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "channel",
+        "timeout_seconds"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "channel diagnostics"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/channel-profile",
+      "mqtt": [
+        {
+          "operation": "post-av-channel-profile",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "apply",
+        "channel",
+        "config",
+        "device_id",
+        "faststream_vfr_output",
+        "reset",
+        "reset_faststream_vfr_output",
+        "restart",
+        "rollback_id",
+        "rollback_token",
+        "stream_key",
+        "verify"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "channel profile"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/device-action",
+      "mqtt": [
+        {
+          "operation": "device-action",
+          "available": true
+        },
+        {
+          "operation": "post-av-device-action",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.control",
+      "actions": [
+        "autofocus_off",
+        "autofocus_on",
+        "autofocus_once",
+        "camera_reboot",
+        "heater_off",
+        "heater_on",
+        "ir_off",
+        "ir_on",
+        "ptz_autotrack_disable",
+        "ptz_autotrack_enable",
+        "ptz_center",
+        "ptz_home",
+        "ptz_position_get",
+        "ptz_preset_goto",
+        "ptz_preset_list",
+        "ptz_stop",
+        "ptz_zoom_in",
+        "ptz_zoom_out",
+        "radar_tracking_disable",
+        "radar_tracking_enable",
+        "signaling_light_start",
+        "signaling_lights_off",
+        "signaling_status",
+        "speaker_delete_clip",
+        "speaker_play_clip",
+        "speaker_refresh",
+        "speaker_upload_library_clip"
+      ],
+      "fields": [
+        "action",
+        "camera",
+        "center",
+        "centerX",
+        "centerY",
+        "center_x",
+        "center_y",
+        "channel",
+        "clip",
+        "clipName",
+        "clip_id",
+        "clip_name",
+        "continuouspantiltmove",
+        "continuouszoommove",
+        "deviceId",
+        "device_id",
+        "gotoserverpresetname",
+        "gotoserverpresetno",
+        "height",
+        "home",
+        "id",
+        "imageHeight",
+        "imageWidth",
+        "image_height",
+        "image_width",
+        "imageheight",
+        "imagewidth",
+        "name",
+        "preset",
+        "ptz_speed",
+        "query",
+        "soundfile",
+        "speed",
+        "value",
+        "volume",
+        "width",
+        "x",
+        "y"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "device action",
+      "action_fields": {
+        "ptz_preset_goto": [
+          "preset",
+          "value"
+        ],
+        "speaker_play_clip": [
+          "clip",
+          "clip_id",
+          "volume"
+        ],
+        "speaker_delete_clip": [
+          "clip",
+          "clip_id"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/device-config",
+      "mqtt": [
+        {
+          "operation": "post-av-device-config",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "control_profile",
+        "control_profile_mode",
+        "control_profile_variant",
+        "device_id",
+        "friendly_name",
+        "id",
+        "restart",
+        "soft_buttons"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "device config"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/device-credentials",
+      "mqtt": [
+        {
+          "operation": "post-av-device-credentials",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "device_id",
+        "id",
+        "password",
+        "provider",
+        "restart",
+        "username"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "device credentials"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/device-soft-buttons",
+      "mqtt": [
+        {
+          "operation": "post-av-device-soft-buttons",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "action",
+        "comment",
+        "device_id",
+        "enabled",
+        "event",
+        "id",
+        "mode",
+        "schedule"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "device soft buttons"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/driver",
+      "mqtt": [
+        {
+          "operation": "post-av-driver",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "channel_count",
+        "channels",
+        "restart"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "driver"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/health",
+      "mqtt": [
+        {
+          "operation": "get-av-health",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/ptz-contexts",
+      "mqtt": [
+        {
+          "operation": "get-av-ptz-contexts",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "ptz contexts"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/ptz-history",
+      "mqtt": [
+        {
+          "operation": "get-av-ptz-history",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "ptz history"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/restart",
+      "mqtt": [
+        {
+          "operation": "post-av-restart",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "channel",
+        "channels",
+        "reconfigure",
+        "rolling"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "restart"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/scan",
+      "mqtt": [
+        {
+          "operation": "post-av-scan",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "cidr",
+        "diagnostics",
+        "password",
+        "provider",
+        "range",
+        "subnet",
+        "targets",
+        "username"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "scan"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/snapshot",
+      "mqtt": [
+        {
+          "operation": "get-av-snapshot",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [
+        "channel",
+        "id"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "snapshot"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/source-profile",
+      "mqtt": [
+        {
+          "operation": "post-av-source-profile",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "apply",
+        "config",
+        "force_auto_discovery",
+        "restart"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "source profile"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/spectrum-update",
+      "mqtt": [
+        {
+          "operation": "post-av-spectrum-update",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "all",
+        "channel",
+        "device_id",
+        "id",
+        "scope"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "spectrum update"
+    },
+    {
+      "method": "GET",
+      "path": "/av-manager-api/state",
+      "mqtt": [
+        {
+          "operation": "get-av-state",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "state"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/telemetry",
+      "mqtt": [
+        {
+          "operation": "post-av-telemetry",
+          "available": true
+        },
+        {
+          "operation": "telemetry",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "sources"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "telemetry"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/telemetry-config",
+      "mqtt": [
+        {
+          "operation": "post-av-telemetry-config",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [
+        "sources"
+      ],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "telemetry config"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/upload",
+      "mqtt": [
+        {
+          "operation": "post-av-upload",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "upload"
+    },
+    {
+      "method": "POST",
+      "path": "/av-manager-api/write-env",
+      "mqtt": [
+        {
+          "operation": "post-av-write-env",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:av",
+      "category": "Cameras and device control",
+      "authentication": "Bearer token",
+      "name": "write env"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-humon",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-humon",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "humon.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:eyeq-humon",
+      "category": "EyeQ Humon",
+      "authentication": "Bearer token",
+      "name": "eyeq humon"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/eyeq-humon",
+      "mqtt": [
+        {
+          "operation": "post-eyeq-humon",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "humon.manage",
+      "actions": [
+        "load",
+        "run-profile",
+        "run-suite",
+        "save-boldnet-mappings",
+        "save-config",
+        "status",
+        "submit-activation"
+      ],
+      "fields": [
+        "action",
+        "attachments",
+        "config",
+        "key",
+        "mappings"
+      ],
+      "scope": "ai6:eyeq-humon",
+      "category": "EyeQ Humon",
+      "authentication": "Bearer token",
+      "name": "eyeq humon",
+      "action_fields": {
+        "save-config": [
+          "config"
+        ],
+        "run-profile": [
+          "key"
+        ],
+        "run-suite": [],
+        "save-boldnet-mappings": [
+          "mappings"
+        ],
+        "submit-activation": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "eyeq vision"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision",
+      "mqtt": [
+        {
+          "operation": "post-eyeq-vision",
+          "available": true
+        },
+        {
+          "operation": "vision",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.manage",
+      "actions": [
+        "camera-control",
+        "clear-default-preset",
+        "delete-control-unit",
+        "delete-preset",
+        "discover-control-units",
+        "ingest-event",
+        "load",
+        "load-preset",
+        "playback-session",
+        "playback-urls",
+        "recording-debug",
+        "save-control-unit",
+        "save-device-telemetry-config",
+        "save-layout",
+        "save-preset",
+        "send-frame-to-trainer",
+        "set-control-output",
+        "set-default-preset",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "actionName",
+        "baseUrl",
+        "base_url",
+        "cameraAction",
+        "cameraId",
+        "camera_id",
+        "centerX",
+        "centerY",
+        "center_x",
+        "center_y",
+        "channel",
+        "clip",
+        "clipName",
+        "clip_id",
+        "clip_name",
+        "command",
+        "description",
+        "deviceAction",
+        "deviceId",
+        "device_id",
+        "durationSec",
+        "duration_sec",
+        "enabled",
+        "end",
+        "endMs",
+        "end_ms",
+        "event",
+        "forceCatalog",
+        "height",
+        "id",
+        "imageHeight",
+        "imageWidth",
+        "image_height",
+        "image_width",
+        "invert",
+        "label",
+        "layout",
+        "libraryClipId",
+        "library_clip_id",
+        "limit",
+        "name",
+        "notes",
+        "operation",
+        "password",
+        "persist",
+        "playheadMs",
+        "playhead_ms",
+        "positionMs",
+        "position_ms",
+        "preset",
+        "presetId",
+        "preset_id",
+        "profile",
+        "provider",
+        "ptzAction",
+        "ptzSpeed",
+        "ptz_speed",
+        "relays",
+        "resolution",
+        "sessionAction",
+        "sessionId",
+        "session_id",
+        "setDefault",
+        "soundfile",
+        "sourceId",
+        "sourceLabel",
+        "source_id",
+        "sources",
+        "speed",
+        "start",
+        "startMs",
+        "start_ms",
+        "state",
+        "subnet",
+        "surface",
+        "targets",
+        "telemetryEnabled",
+        "telemetryMetrics",
+        "ts_ms",
+        "unitId",
+        "unit_id",
+        "url",
+        "username",
+        "value",
+        "volume",
+        "width",
+        "window",
+        "windowMinutes",
+        "window_minutes",
+        "x",
+        "y"
+      ],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "eyeq vision",
+      "action_fields": {
+        "playback-session": [],
+        "recording-debug": [
+          "cameraId",
+          "camera_id",
+          "end",
+          "endMs",
+          "end_ms",
+          "forceCatalog",
+          "limit",
+          "start",
+          "startMs",
+          "start_ms",
+          "window",
+          "windowMinutes",
+          "window_minutes"
+        ],
+        "save-layout": [
+          "layout"
+        ],
+        "save-preset": [],
+        "load-preset": [
+          "id",
+          "presetId",
+          "preset_id"
+        ],
+        "delete-preset": [
+          "id",
+          "presetId",
+          "preset_id"
+        ],
+        "set-default-preset": [
+          "id",
+          "presetId",
+          "preset_id",
+          "surface"
+        ],
+        "clear-default-preset": [
+          "surface"
+        ],
+        "ingest-event": [
+          "event"
+        ],
+        "playback-urls": [
+          "cameraId",
+          "camera_id",
+          "durationSec",
+          "duration_sec",
+          "positionMs",
+          "position_ms",
+          "ts_ms"
+        ],
+        "send-frame-to-trainer": [],
+        "save-control-unit": [],
+        "save-device-telemetry-config": [],
+        "discover-control-units": [],
+        "delete-control-unit": [
+          "id",
+          "unitId",
+          "unit_id"
+        ],
+        "set-control-output": [],
+        "camera-control": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/radar",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision-radar",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "radar"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/radar-tracking",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision-radar-tracking",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "radar tracking"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision/radar-tracking",
+      "mqtt": [
+        {
+          "operation": "post-eyeq-vision-radar-tracking",
+          "available": true
+        },
+        {
+          "operation": "tracking",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.control",
+      "actions": [
+        "arm",
+        "calibrate",
+        "disable",
+        "enable",
+        "pause",
+        "pause5",
+        "probe",
+        "save"
+      ],
+      "fields": [
+        "action",
+        "config",
+        "track_id"
+      ],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "radar tracking",
+      "action_fields": {
+        "calibrate": [
+          "track_id"
+        ],
+        "probe": [],
+        "arm": [],
+        "pause": [],
+        "save": [
+          "config"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision-tracking-site",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "tracking site"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision/tracking-site",
+      "mqtt": [
+        {
+          "operation": "post-eyeq-vision-tracking-site",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.manage",
+      "actions": [
+        "cancel",
+        "finish",
+        "home_capture",
+        "home_save",
+        "mark",
+        "pair",
+        "place",
+        "radar_map",
+        "remove",
+        "schedule",
+        "start",
+        "survey",
+        "upload",
+        "zone_preview",
+        "zone_put",
+        "zone_remove"
+      ],
+      "fields": [
+        "a",
+        "action",
+        "b",
+        "bearing_deg",
+        "confirm",
+        "confirmed",
+        "count",
+        "data",
+        "days",
+        "delay_s",
+        "device_id",
+        "distance_m",
+        "enabled",
+        "end",
+        "heading_deg",
+        "height",
+        "map_id",
+        "name",
+        "pair_id",
+        "point",
+        "polygon",
+        "preset_id",
+        "priority",
+        "ptz_id",
+        "radar_id",
+        "redrawn",
+        "revision",
+        "session_id",
+        "start",
+        "target_height_m",
+        "tilt_adjustment_deg",
+        "timezone",
+        "track_id",
+        "unit",
+        "width",
+        "zone_id"
+      ],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "tracking site",
+      "action_fields": {
+        "mark": [
+          "confirmed",
+          "session_id",
+          "track_id"
+        ],
+        "home_capture": [
+          "name"
+        ],
+        "home_save": [
+          "delay_s",
+          "enabled",
+          "name",
+          "preset_id"
+        ],
+        "zone_preview": [
+          "pair_id",
+          "point"
+        ],
+        "radar_map": [
+          "confirm",
+          "height",
+          "radar_id",
+          "width"
+        ],
+        "upload": [
+          "data"
+        ],
+        "survey": [
+          "a",
+          "b",
+          "bearing_deg",
+          "distance_m"
+        ],
+        "place": [
+          "device_id",
+          "heading_deg",
+          "height",
+          "point",
+          "unit"
+        ],
+        "remove": [
+          "confirm",
+          "device_id"
+        ],
+        "zone_put": [
+          "enabled",
+          "map_id",
+          "name",
+          "pair_id",
+          "polygon",
+          "priority",
+          "redrawn",
+          "tilt_adjustment_deg",
+          "zone_id"
+        ],
+        "zone_remove": [
+          "confirm",
+          "zone_id"
+        ],
+        "pair": [
+          "ptz_id",
+          "radar_id",
+          "target_height_m"
+        ],
+        "schedule": [
+          "days",
+          "end",
+          "pair_id",
+          "start",
+          "timezone"
+        ],
+        "start": [
+          "count",
+          "pair_id"
+        ],
+        "finish": [],
+        "cancel": [
+          "session_id"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site/radar-frame",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision-tracking-site-radar-frame",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [
+        "radar_id"
+      ],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "radar frame"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site/radar-view",
+      "mqtt": [
+        {
+          "operation": "get-eyeq-vision-tracking-site-radar-view",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "vision.view",
+      "actions": [],
+      "fields": [
+        "radar_id"
+      ],
+      "scope": "ai6:eyeq-vision",
+      "category": "EyeQ vision and radar",
+      "authentication": "Bearer token",
+      "name": "radar view"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/fan-control",
+      "mqtt": [
+        {
+          "operation": "fans",
+          "available": true
+        },
+        {
+          "operation": "post-fan-control",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [
+        "restore",
+        "set-pwm",
+        "snapshot"
+      ],
+      "fields": [
+        "action",
+        "channels",
+        "chip",
+        "enable",
+        "index",
+        "indices",
+        "raw",
+        "states"
+      ],
+      "scope": "ai6:control",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "fan control",
+      "action_fields": {
+        "set-pwm": [
+          "enable",
+          "raw"
+        ],
+        "restore": [
+          "states"
+        ],
+        "snapshot": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/fan-policy",
+      "mqtt": [
+        {
+          "operation": "get-fan-policy",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "fan policy"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/fan-policy",
+      "mqtt": [
+        {
+          "operation": "fan-policy",
+          "available": true
+        },
+        {
+          "operation": "post-fan-policy",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [
+        "apply",
+        "case-mode",
+        "set-case-mode",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "caseMode",
+        "mode"
+      ],
+      "scope": "ai6:control",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "fan policy",
+      "action_fields": {
+        "status": [
+          "sessionId",
+          "session_id"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/front-panel",
+      "mqtt": [
+        {
+          "operation": "front-panel",
+          "available": true
+        },
+        {
+          "operation": "post-front-panel",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [
+        "clear-shutdown-state",
+        "disable-alerts"
+      ],
+      "fields": [
+        "action",
+        "articulation",
+        "bpm",
+        "confirm",
+        "reason",
+        "sequence"
+      ],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "front panel",
+      "action_fields": {
+        "clear-shutdown-state": [
+          "reason"
+        ],
+        "disable-alerts": [
+          "confirm"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/power-control",
+      "mqtt": [
+        {
+          "operation": "post-power-control",
+          "available": true
+        },
+        {
+          "operation": "power",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.power.manage",
+      "actions": [
+        "reboot",
+        "refresh-policy",
+        "set-power-button-policy",
+        "shutdown"
+      ],
+      "fields": [
+        "action",
+        "confirm",
+        "mode",
+        "reason"
+      ],
+      "scope": "ai6:power",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "power control",
+      "action_fields": {
+        "refresh-policy": [],
+        "set-power-button-policy": [
+          "mode"
+        ],
+        "shutdown": [
+          "confirm",
+          "reason"
+        ],
+        "reboot": [
+          "confirm",
+          "reason"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/front-panel-api/beep-test",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "count",
+        "interval_ms"
+      ],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "beep test"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/block-devices",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "block devices"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/diagnostics",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "diagnostics"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/discovery",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "discovery"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/gpio-snapshot",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "chip",
+        "line",
+        "lines",
+        "max_inputs",
+        "offset_max",
+        "offset_min"
+      ],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "gpio snapshot"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/health",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/input-devices",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "input devices"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/input-events",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "event",
+        "events",
+        "seconds"
+      ],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "input events"
+    },
+    {
+      "method": "POST",
+      "path": "/front-panel-api/shutdown-tone",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "shutdown tone"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/status",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Hardware and power",
+      "authentication": "Bearer token",
+      "name": "status"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/agent-media/dashboard-state.png",
+      "fields": [],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read + ai6:eyeq-vision",
+      "category": "Images and video",
+      "authentication": "Bearer token",
+      "name": "dashboard state.png"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/agent-media/snapshot",
+      "fields": [
+        "channel"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read + ai6:av",
+      "category": "Images and video",
+      "authentication": "Bearer token",
+      "name": "snapshot"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/export/{camera_id}",
+      "fields": [
+        "camera_id",
+        "end",
+        "format",
+        "resolution",
+        "start"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "Images and video",
+      "authentication": "Bearer token",
+      "name": "{camera id}"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/playback-frame/{camera_id}.jpg",
+      "fields": [
+        "camera_id",
+        "pos",
+        "resolution"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "Images and video",
+      "authentication": "Bearer token",
+      "name": "{camera id}.jpg"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/playback-stream/{camera_id}.mjpeg",
+      "fields": [
+        "camera_id",
+        "pos",
+        "resolution"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:eyeq-vision",
+      "category": "Images and video",
+      "authentication": "Bearer token",
+      "name": "{camera id}.mjpeg"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/alpr",
+      "mqtt": [
+        {
+          "operation": "get-alpr",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:models",
+      "category": "License plate recognition",
+      "authentication": "Bearer token",
+      "name": "alpr"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/alpr",
+      "mqtt": [
+        {
+          "operation": "post-alpr",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [
+        "activate",
+        "apply-spectrum",
+        "deactivate",
+        "record-evidence",
+        "save",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "applyToSpectrum",
+        "camera",
+        "config",
+        "detected",
+        "expected",
+        "expectedPlate",
+        "notes",
+        "observed",
+        "observedPlate",
+        "restart"
+      ],
+      "scope": "ai6:models",
+      "category": "License plate recognition",
+      "authentication": "Bearer token",
+      "name": "alpr",
+      "action_fields": {
+        "activate": [
+          "applyToSpectrum",
+          "restart"
+        ],
+        "apply-spectrum": [
+          "restart"
+        ],
+        "deactivate": [],
+        "save": [],
+        "status": [],
+        "record-evidence": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/mqtt",
+      "fields": [
+        "view"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "MQTT administration",
+      "authentication": "Administrator session",
+      "name": "mqtt"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/mqtt",
+      "fields": [
+        "action",
+        "controls",
+        "enabled",
+        "label",
+        "pacs_scope",
+        "publish_topics",
+        "read_topics",
+        "snapshots",
+        "username",
+        "view"
+      ],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "MQTT administration",
+      "authentication": "Administrator session",
+      "name": "mqtt"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/network-security",
+      "mqtt": [
+        {
+          "operation": "get-network-security",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.network.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Network",
+      "authentication": "Bearer token",
+      "name": "network security"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/network-security",
+      "mqtt": [
+        {
+          "operation": "post-network-security",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.network.manage",
+      "actions": [
+        "disable-onvif-broadcast",
+        "enable-onvif-broadcast",
+        "save",
+        "set-onvif-broadcast",
+        "status"
+      ],
+      "fields": [
+        "action"
+      ],
+      "scope": "ai6:control",
+      "category": "Network",
+      "authentication": "Bearer token",
+      "name": "network security",
+      "action_fields": {
+        "status": [],
+        "enable-onvif-broadcast": [],
+        "disable-onvif-broadcast": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/network-watchdog",
+      "mqtt": [
+        {
+          "operation": "get-network-watchdog",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "Network",
+      "authentication": "Bearer token",
+      "name": "network watchdog"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/network-watchdog",
+      "mqtt": [
+        {
+          "operation": "post-network-watchdog",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.network.manage",
+      "actions": [
+        "apply-network-config",
+        "recover-now",
+        "save-network-config"
+      ],
+      "fields": [
+        "action",
+        "config",
+        "reason"
+      ],
+      "scope": "ai6:control",
+      "category": "Network",
+      "authentication": "Bearer token",
+      "name": "network watchdog",
+      "action_fields": {
+        "recover-now": [
+          "reason"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/notifications",
+      "mqtt": [
+        {
+          "operation": "get-notifications",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "notifications.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:notifications",
+      "category": "Notifications",
+      "authentication": "Bearer token",
+      "name": "notifications"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/notifications",
+      "mqtt": [
+        {
+          "operation": "notifications",
+          "available": true
+        },
+        {
+          "operation": "post-notifications",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "notifications.manage",
+      "actions": [
+        "automation-status",
+        "delete-device",
+        "delete-rule",
+        "delete-schedule",
+        "evaluate-event",
+        "ingest-event",
+        "load",
+        "record-event",
+        "save-rule",
+        "save-schedule",
+        "status",
+        "subscribe-device",
+        "test-notification",
+        "unsubscribe-device",
+        "upsert-device"
+      ],
+      "fields": [
+        "action",
+        "body",
+        "days",
+        "delivery",
+        "deviceId",
+        "deviceIds",
+        "enabled",
+        "end",
+        "endpoint",
+        "event",
+        "eventType",
+        "eventTypes",
+        "id",
+        "keys",
+        "label",
+        "name",
+        "notes",
+        "platform",
+        "ruleId",
+        "scheduleId",
+        "scheduleIds",
+        "severity",
+        "sourceId",
+        "sourceIds",
+        "start",
+        "subscription",
+        "thresholds",
+        "title",
+        "userAgent",
+        "user_agent"
+      ],
+      "scope": "ai6:notifications",
+      "category": "Notifications",
+      "authentication": "Bearer token",
+      "name": "notifications",
+      "action_fields": {
+        "save-rule": [],
+        "delete-rule": [],
+        "save-schedule": [],
+        "delete-schedule": [],
+        "automation-status": [],
+        "evaluate-event": [
+          "event"
+        ],
+        "test-notification": [
+          "body",
+          "delivery",
+          "eventType",
+          "severity",
+          "sourceId",
+          "title"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/spectrum-connection",
+      "mqtt": [
+        {
+          "operation": "get-spectrum-connection",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.users.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Recording",
+      "authentication": "Bearer token",
+      "name": "spectrum connection"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/spectrum-connection",
+      "mqtt": [
+        {
+          "operation": "post-spectrum-connection",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.users.manage",
+      "actions": [
+        "save",
+        "test"
+      ],
+      "fields": [
+        "action",
+        "browserLogin",
+        "password",
+        "username"
+      ],
+      "scope": "ai6:control",
+      "category": "Recording",
+      "authentication": "Bearer token",
+      "name": "spectrum connection",
+      "action_fields": {
+        "save": [
+          "browserLogin"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/spectrum-recordings",
+      "mqtt": [
+        {
+          "operation": "get-spectrum-recordings",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Recording",
+      "authentication": "Bearer token",
+      "name": "spectrum recordings"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/spectrum-recordings",
+      "mqtt": [
+        {
+          "operation": "post-spectrum-recordings",
+          "available": true
+        },
+        {
+          "operation": "recording",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ave.manage",
+      "actions": [
+        "apply",
+        "audio_check",
+        "audio_enable",
+        "backup",
+        "enroll_ave",
+        "managed_audio_sync",
+        "refresh",
+        "status",
+        "use_raid"
+      ],
+      "fields": [
+        "action",
+        "all",
+        "cameraId",
+        "channel",
+        "force",
+        "reason",
+        "schedule",
+        "scope",
+        "spectrumCameraId"
+      ],
+      "scope": "ai6:control",
+      "category": "Recording",
+      "authentication": "Bearer token",
+      "name": "spectrum recordings",
+      "action_fields": {
+        "managed_audio_sync": [
+          "channel"
+        ],
+        "enroll_ave": [],
+        "use_raid": [],
+        "backup": [
+          "reason"
+        ],
+        "apply": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/backup-download",
+      "mqtt": [
+        {
+          "operation": "get-backup-download",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "storage.manage",
+      "actions": [],
+      "fields": [
+        "kind",
+        "path"
+      ],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "backup download"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/backup-upload",
+      "mqtt": [
+        {
+          "operation": "post-backup-upload",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "storage.manage",
+      "actions": [],
+      "fields": [
+        "filename"
+      ],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "backup upload"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/offsite-backups",
+      "mqtt": [
+        {
+          "operation": "get-offsite-backups",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.view",
+      "actions": [],
+      "fields": [
+        "provider"
+      ],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "offsite backups"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/offsite-backups",
+      "mqtt": [
+        {
+          "operation": "post-offsite-backups",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.manage",
+      "actions": [
+        "delete-remote",
+        "save-remote",
+        "start-backup",
+        "test-remote"
+      ],
+      "fields": [
+        "action",
+        "checkers",
+        "continueOnError",
+        "continue_on_error",
+        "destination",
+        "dryRun",
+        "dry_run",
+        "enabled",
+        "label",
+        "mode",
+        "name",
+        "options",
+        "remote",
+        "remoteName",
+        "sourceTypes",
+        "source_types",
+        "transfers",
+        "type"
+      ],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "offsite backups",
+      "action_fields": {
+        "save-remote": [],
+        "delete-remote": [],
+        "test-remote": [],
+        "start-backup": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/raid/action",
+      "mqtt": [
+        {
+          "operation": "post-raid-action",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.manage",
+      "actions": [
+        "add",
+        "assemble-scan",
+        "backup-create",
+        "backup-list",
+        "backup-restore",
+        "backup-validate-restore",
+        "backup-verify",
+        "create",
+        "external-list",
+        "external-mount",
+        "external-unmount",
+        "fail",
+        "format",
+        "mount",
+        "mount-config",
+        "partition",
+        "promote-recording-target",
+        "remove",
+        "save-mount",
+        "stop",
+        "unmount",
+        "wipefs",
+        "zero-superblock"
+      ],
+      "fields": [
+        "action",
+        "array",
+        "assume_clean",
+        "backup",
+        "chunk",
+        "destination",
+        "devices",
+        "dryRun",
+        "error",
+        "filesystem",
+        "force",
+        "label",
+        "level",
+        "member",
+        "metadata",
+        "mountpoint",
+        "name",
+        "note",
+        "path",
+        "persist",
+        "replace_existing",
+        "restart",
+        "staged_restore_path",
+        "target"
+      ],
+      "scope": "ai6:control",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "action",
+      "action_fields": {
+        "backup-list": [],
+        "backup-create": [],
+        "backup-verify": [],
+        "backup-restore": [],
+        "backup-validate-restore": [],
+        "save-mount": [],
+        "external-list": [],
+        "external-mount": [],
+        "external-unmount": [],
+        "mount-config": [],
+        "promote-recording-target": [],
+        "mount": [
+          "filesystem",
+          "mountpoint",
+          "persist",
+          "replace_existing",
+          "target"
+        ],
+        "unmount": [
+          "mountpoint"
+        ],
+        "wipefs": [
+          "target"
+        ],
+        "partition": [
+          "filesystem",
+          "label",
+          "target"
+        ],
+        "format": [
+          "filesystem",
+          "label",
+          "target"
+        ],
+        "assemble-scan": [],
+        "create": [
+          "assume_clean",
+          "chunk",
+          "devices",
+          "force",
+          "level",
+          "metadata",
+          "name"
+        ],
+        "zero-superblock": [
+          "target"
+        ],
+        "stop": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/smart-scan",
+      "mqtt": [
+        {
+          "operation": "get-smart-scan",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "smart scan"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/smart-scan",
+      "mqtt": [
+        {
+          "operation": "post-smart-scan",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.manage",
+      "actions": [
+        "start",
+        "status"
+      ],
+      "fields": [
+        "action",
+        "device",
+        "target",
+        "test",
+        "test_type"
+      ],
+      "scope": "ai6:hardware",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "smart scan",
+      "action_fields": {
+        "status": [],
+        "start": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/storage-health",
+      "mqtt": [
+        {
+          "operation": "get-storage-health",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "storage.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "storage health"
+    },
+    {
+      "method": "POST",
+      "path": "/backup-api/backup",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "backup"
+    },
+    {
+      "method": "POST",
+      "path": "/backup-api/daily",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "enabled"
+      ],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "daily"
+    },
+    {
+      "method": "GET",
+      "path": "/backup-api/health",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "POST",
+      "path": "/backup-api/restore",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "restore"
+    },
+    {
+      "method": "POST",
+      "path": "/backup-api/restore-local",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "archivePath",
+        "displayPath",
+        "restart",
+        "dryRun"
+      ],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "restore local"
+    },
+    {
+      "method": "GET",
+      "path": "/backup-api/status",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:backup",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "status"
+    },
+    {
+      "method": "GET",
+      "path": "/front-panel-api/storage-topology",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:hardware",
+      "category": "Storage RAID and backup",
+      "authentication": "Bearer token",
+      "name": "storage topology"
+    },
+    {
+      "method": "GET",
+      "path": "/ai6-api/",
+      "fields": [],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "Overview"
+    },
+    {
+      "method": "GET",
+      "path": "/ai6-api/openapi.json",
+      "fields": [],
+      "mqtt": [],
+      "available": true,
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "openapi.json"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai-mix-test-video",
+      "mqtt": [
+        {
+          "operation": "get-ai-mix-test-video",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "ai mix test video"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/ai-mix-test-video",
+      "mqtt": [
+        {
+          "operation": "post-ai-mix-test-video",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "ai mix test video"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai-mix-test-video/raw",
+      "mqtt": [
+        {
+          "operation": "get-ai-mix-test-video-raw",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "raw"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai6-api",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "ai6 api"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai6-api/",
+      "mqtt": [
+        {
+          "operation": "get-ai6-api",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "Overview"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/ai6-api/openapi.json",
+      "mqtt": [
+        {
+          "operation": "get-ai6-api-openapi-json",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "openapi.json"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/dashboard",
+      "mqtt": [
+        {
+          "operation": "get-dashboard",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "status.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "dashboard"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/device-info",
+      "mqtt": [
+        {
+          "operation": "get-device-info",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.info.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "device info"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/device-info",
+      "mqtt": [
+        {
+          "operation": "post-device-info",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.info.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "device info"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/events",
+      "mqtt": [
+        {
+          "operation": "get-events",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "status.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "events"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/hardware-observability",
+      "mqtt": [
+        {
+          "operation": "get-hardware-observability",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "status.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "hardware observability"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/health",
+      "mqtt": [
+        {
+          "operation": "get-health",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/lpr-test-video",
+      "mqtt": [
+        {
+          "operation": "get-lpr-test-video",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.api.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "lpr test video"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/lpr-test-video",
+      "mqtt": [
+        {
+          "operation": "post-lpr-test-video",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "ai.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:control",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "lpr test video"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/status",
+      "mqtt": [
+        {
+          "operation": "get-status",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "status.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "status"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/support",
+      "mqtt": [
+        {
+          "operation": "get-support",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "support.submit",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "support"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/support",
+      "mqtt": [
+        {
+          "operation": "post-support",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "support.submit",
+      "actions": [
+        "submit"
+      ],
+      "fields": [
+        "action",
+        "attachmentTokens",
+        "contact",
+        "description",
+        "evidence",
+        "severity",
+        "subject"
+      ],
+      "scope": "ai6:control",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "support",
+      "action_fields": {
+        "submit": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/support/attachment",
+      "mqtt": [
+        {
+          "operation": "post-support-attachment",
+          "available": false
+        }
+      ],
+      "available": true,
+      "permission": "support.submit",
+      "actions": [],
+      "fields": [
+        "filename"
+      ],
+      "scope": "ai6:control",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "attachment"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/telemetry",
+      "mqtt": [
+        {
+          "operation": "get-telemetry",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "status.view",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "System status and configuration",
+      "authentication": "Bearer token",
+      "name": "telemetry"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/workload-governor",
+      "mqtt": [
+        {
+          "operation": "get-workload-governor",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [],
+      "fields": [],
+      "scope": "ai6:read",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "workload governor"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/workload-governor",
+      "mqtt": [
+        {
+          "operation": "post-workload-governor",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "settings.health.manage",
+      "actions": [
+        "clear-override",
+        "force-state",
+        "save-policy",
+        "set-enabled"
+      ],
+      "fields": [
+        "action",
+        "policy"
+      ],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "workload governor",
+      "action_fields": {
+        "save-policy": [
+          "policy"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/workload-governor-api/action",
+      "mqtt": [],
+      "available": true,
+      "fields": [
+        "enabled",
+        "state"
+      ],
+      "actions": [
+        "clear-override",
+        "force-state",
+        "set-enabled"
+      ],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "action"
+    },
+    {
+      "method": "GET",
+      "path": "/workload-governor-api/health",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/workload-governor-api/policy",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "policy"
+    },
+    {
+      "method": "POST",
+      "path": "/workload-governor-api/policy",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "policy"
+    },
+    {
+      "method": "GET",
+      "path": "/workload-governor-api/status",
+      "mqtt": [],
+      "available": true,
+      "fields": [],
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Workload control",
+      "authentication": "Bearer token",
+      "name": "status"
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/zensornet",
+      "mqtt": [
+        {
+          "operation": "get-zensornet",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "zensornet.view",
+      "actions": [],
+      "fields": [
+        "nodes"
+      ],
+      "scope": "ai6:zensornet",
+      "category": "ZensorNet",
+      "authentication": "Bearer token",
+      "name": "zensornet"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/zensornet",
+      "mqtt": [
+        {
+          "operation": "post-zensornet",
+          "available": true
+        },
+        {
+          "operation": "zensornet",
+          "available": true
+        }
+      ],
+      "available": true,
+      "permission": "zensornet.manage",
+      "actions": [
+        "backfill-telemetry",
+        "enroll",
+        "gateway-command",
+        "gateway-diag",
+        "gateway-events",
+        "gateway-firmware",
+        "gateway-flash",
+        "ingest-sample",
+        "load",
+        "relay-command",
+        "remove-sensor",
+        "save-config",
+        "save-gateway-config",
+        "save-retention",
+        "save-visualizer",
+        "sensor-command",
+        "sensor-settings",
+        "status",
+        "sync",
+        "update-sensor"
+      ],
+      "fields": [
+        "action",
+        "aes256_key_hex",
+        "apply",
+        "command",
+        "config",
+        "confirm",
+        "device_label",
+        "label",
+        "limit",
+        "line",
+        "location",
+        "node",
+        "notes",
+        "paper_secret",
+        "policies",
+        "sample",
+        "secret",
+        "send_break",
+        "sensor_type",
+        "settings",
+        "status",
+        "target",
+        "type",
+        "visualizer",
+        "zensor_id"
+      ],
+      "scope": "ai6:zensornet",
+      "category": "ZensorNet",
+      "authentication": "Bearer token",
+      "name": "zensornet",
+      "action_fields": {
+        "relay-command": [],
+        "sync": [],
+        "save-config": [
+          "config"
+        ],
+        "save-visualizer": [
+          "visualizer"
+        ],
+        "save-gateway-config": [
+          "config"
+        ],
+        "gateway-command": [
+          "command",
+          "line"
+        ],
+        "gateway-events": [
+          "limit"
+        ],
+        "gateway-diag": [],
+        "gateway-firmware": [],
+        "gateway-flash": [
+          "confirm",
+          "send_break",
+          "target"
+        ],
+        "save-retention": [],
+        "backfill-telemetry": [
+          "limit",
+          "node"
+        ],
+        "enroll": [
+          "aes256_key_hex",
+          "device_label",
+          "label",
+          "node",
+          "notes",
+          "paper_secret",
+          "secret",
+          "zensor_id"
+        ],
+        "update-sensor": [
+          "aes256_key_hex",
+          "device_label",
+          "label",
+          "location",
+          "node",
+          "notes",
+          "paper_secret",
+          "secret",
+          "sensor_type",
+          "status",
+          "type",
+          "zensor_id"
+        ],
+        "sensor-settings": [
+          "apply",
+          "node",
+          "settings",
+          "zensor_id"
+        ],
+        "sensor-command": [
+          "command",
+          "node",
+          "zensor_id"
+        ],
+        "remove-sensor": [
+          "node",
+          "zensor_id"
+        ],
+        "ingest-sample": [
+          "label",
+          "node",
+          "sample",
+          "zensor_id"
+        ]
+      }
+    }
+  ],
+  "mqtt_operations": {
+    "camera-overlays": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/camera-overlays",
+      "permission": "ave.manage",
+      "transport": "json"
+    },
+    "device-action": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/device-action",
+      "permission": "ave.control",
+      "transport": "json"
+    },
+    "fan-policy": {
+      "alias_of": "post-fan-policy",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/fan-policy",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "fans": {
+      "alias_of": "post-fan-control",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/fan-control",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "front-panel": {
+      "alias_of": "post-front-panel",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/front-panel",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "get-access": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-configuration": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-configuration-inventory": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/inventory",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-configuration-reader-readiness": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/reader-readiness",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-configuration-schedule-status": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/configuration/schedule-status",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-connectors-storeganise": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/connectors/storeganise",
+      "permission": "pacs.connectors.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-controllers": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/controllers",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-credentials": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/credentials",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-doors": {
+      "available": false,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "get-access-events": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/events",
+      "permission": "pacs.events.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-history": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/history",
+      "permission": "pacs.events.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-people": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/people",
+      "permission": "pacs.people.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-person": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/people/{person_id}",
+      "path_parameters": [
+        "person_id"
+      ],
+      "permission": "pacs.people.view",
+      "resource_scope": "physical-access",
+      "transport": "json"
+    },
+    "get-access-shared": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/shared",
+      "permission": "pacs.people.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-wireless-readers": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/wireless-readers",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-access-wireless-readers-catalog": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/wireless-readers/catalog",
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "get-ai-mix-test-video": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/ai-mix-test-video",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-ai-mix-test-video-raw": {
+      "available": false,
+      "method": "GET",
+      "path": "/appliance-api/ai-mix-test-video/raw",
+      "permission": "settings.api.manage",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint."
+    },
+    "get-ai6-agent-access": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/ai6-agent-access",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-ai6-api": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/ai6-api/",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-ai6-api-openapi-json": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/ai6-api/openapi.json",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-alpr": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/alpr",
+      "permission": "ai.view",
+      "transport": "json"
+    },
+    "get-av-ai-mjpeg": {
+      "available": false,
+      "method": "GET",
+      "path": "/av-manager-api/ai/mjpeg",
+      "permission": "ave.view",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint.",
+      "validation": "pending bench validation"
+    },
+    "get-av-audio-library": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/audio-library",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-av-camera-overlays": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/camera-overlays",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-av-health": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/health",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-av-ptz-contexts": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/ptz-contexts",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-av-ptz-history": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/ptz-history",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-av-snapshot": {
+      "available": false,
+      "method": "GET",
+      "path": "/av-manager-api/snapshot",
+      "permission": "ave.view",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint.",
+      "validation": "pending bench validation"
+    },
+    "get-av-state": {
+      "available": true,
+      "method": "GET",
+      "path": "/av-manager-api/state",
+      "permission": "ave.view",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "get-backup-download": {
+      "available": false,
+      "method": "GET",
+      "path": "/appliance-api/backup-download",
+      "permission": "storage.manage",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint."
+    },
+    "get-dashboard": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/dashboard",
+      "permission": "status.view",
+      "transport": "json"
+    },
+    "get-device-info": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/device-info",
+      "permission": "settings.info.view",
+      "transport": "json"
+    },
+    "get-events": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/events",
+      "permission": "status.view",
+      "transport": "json"
+    },
+    "get-eyeq-humon": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-humon",
+      "permission": "humon.view",
+      "transport": "json"
+    },
+    "get-eyeq-vision": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision",
+      "permission": "vision.view",
+      "transport": "json"
+    },
+    "get-eyeq-vision-radar": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/radar",
+      "permission": "vision.view",
+      "transport": "json"
+    },
+    "get-eyeq-vision-radar-tracking": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/radar-tracking",
+      "permission": "vision.view",
+      "transport": "json"
+    },
+    "get-eyeq-vision-tracking-site": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site",
+      "permission": "vision.view",
+      "transport": "json"
+    },
+    "get-eyeq-vision-tracking-site-radar-frame": {
+      "available": false,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site/radar-frame",
+      "permission": "vision.view",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint."
+    },
+    "get-eyeq-vision-tracking-site-radar-view": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/eyeq-vision/tracking-site/radar-view",
+      "permission": "vision.view",
+      "transport": "json"
+    },
+    "get-fan-policy": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/fan-policy",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "get-feature-modules": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/feature-modules",
+      "permission": "settings.info.view",
+      "transport": "json"
+    },
+    "get-hailo-model-zoo": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/hailo-model-zoo",
+      "permission": "ai.view",
+      "transport": "json"
+    },
+    "get-hailo-plugin-status": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/hailo-plugin/status",
+      "permission": "ai.view",
+      "transport": "json"
+    },
+    "get-hailo-taxonomy": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/hailo-taxonomy",
+      "permission": "ai.view",
+      "transport": "json"
+    },
+    "get-hardware-observability": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/hardware-observability",
+      "permission": "status.view",
+      "transport": "json"
+    },
+    "get-health": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/health",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-lpr-test-video": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/lpr-test-video",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "get-model-chains": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/model-chains",
+      "permission": "ai.view",
+      "transport": "json"
+    },
+    "get-network-security": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/network-security",
+      "permission": "settings.network.manage",
+      "transport": "json"
+    },
+    "get-network-watchdog": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/network-watchdog",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "get-notifications": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/notifications",
+      "permission": "notifications.view",
+      "transport": "json"
+    },
+    "get-offsite-backups": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/offsite-backups",
+      "permission": "storage.view",
+      "transport": "json"
+    },
+    "get-smart-scan": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/smart-scan",
+      "permission": "storage.view",
+      "transport": "json"
+    },
+    "get-spectrum-connection": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/spectrum-connection",
+      "permission": "settings.users.manage",
+      "transport": "json"
+    },
+    "get-spectrum-recordings": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/spectrum-recordings",
+      "permission": "ave.view",
+      "transport": "json"
+    },
+    "get-status": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/status",
+      "permission": "status.view",
+      "transport": "json"
+    },
+    "get-storage-health": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/storage-health",
+      "permission": "storage.view",
+      "transport": "json"
+    },
+    "get-support": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/support",
+      "permission": "support.submit",
+      "transport": "json"
+    },
+    "get-telemetry": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/telemetry",
+      "permission": "status.view",
+      "transport": "json"
+    },
+    "get-user-access": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/user-access",
+      "permission": "settings.users.manage",
+      "transport": "json"
+    },
+    "get-workload-governor": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/workload-governor",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "get-zensornet": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/zensornet",
+      "permission": "zensornet.view",
+      "transport": "json"
+    },
+    "models": {
+      "alias_of": "post-model-chains",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/model-chains",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "notifications": {
+      "alias_of": "post-notifications",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/notifications",
+      "permission": "notifications.manage",
+      "transport": "json"
+    },
+    "post-access-audit-export": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/audit/export",
+      "permission": "pacs.audit.export",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-commission": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/commission",
+      "permission": "pacs.commission",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-configuration-doors": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/doors",
+      "permission": "pacs.configuration.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-configuration-groups": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/groups",
+      "permission": "pacs.policy.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-configuration-readers": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/readers",
+      "permission": "pacs.configuration.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-configuration-schedules": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/schedules",
+      "permission": "pacs.policy.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-configuration-timezones": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/configuration/timezones",
+      "permission": "pacs.policy.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-connect": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connect",
+      "permission": "pacs.commission",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-connectors-storeganise-configuration": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/configuration",
+      "permission": "pacs.connectors.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-connectors-storeganise-refresh": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/refresh",
+      "permission": "pacs.connectors.sync",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-connectors-storeganise-validate": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/connectors/storeganise/validate",
+      "permission": "pacs.connectors.test",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-controller-factory-reset": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/{controller_id}/factory-reset",
+      "permission": "pacs.factory.reset",
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-controller-firmware": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/{controller_id}/firmware",
+      "permission": "pacs.firmware.manage",
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-controllers-collector": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/collector",
+      "permission": "pacs.controllers.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-controllers-register": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/register",
+      "permission": "pacs.controllers.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-controllers-verify": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/controllers/verify",
+      "permission": "pacs.controllers.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-credentials-enroll": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/enroll",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-credentials-pin-change": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/pin/change",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-credentials-pin-reveal": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/pin/reveal",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": true,
+      "transport": "json"
+    },
+    "post-access-credentials-revoke": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/credentials/revoke",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-discovery": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/discovery",
+      "permission": "pacs.commission",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-door-command": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/doors/{door_id}/commands",
+      "permission": "pacs.doors.operate",
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-events-sync": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/events/sync",
+      "permission": "pacs.events.view",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-identifiers": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/identifiers",
+      "permission": "pacs.identifiers.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-people": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people",
+      "permission": "pacs.people.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-people-provision": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people/provision",
+      "permission": "pacs.people.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-policies": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/policies",
+      "permission": "pacs.policy.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json",
+      "unavailable_reason": "Not available in this API edition."
+    },
+    "post-access-shared-activate": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/activate",
+      "permission": "pacs.access.grant",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-shared-groups": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/groups",
+      "permission": "pacs.policy.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-shared-revoke": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/revoke",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-shared-stage": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shared/stage",
+      "permission": "pacs.credentials.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-wireless-readers-commission": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/commission",
+      "permission": "pacs.configuration.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-wireless-readers-configure": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/configure",
+      "permission": "pacs.configuration.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-access-wireless-readers-disable": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/physical-access/wireless-readers/disable",
+      "permission": "pacs.configuration.manage",
+      "resource_scope": "physical-access",
+      "sensitive_result": false,
+      "transport": "json"
+    },
+    "post-ai-mix-test-video": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/ai-mix-test-video",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-ai6-agent-access": {
+      "actions": [
+        "create-grant",
+        "revoke-grant",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/ai6-agent-access",
+      "permission": "settings.api.manage",
+      "transport": "json"
+    },
+    "post-alpr": {
+      "actions": [
+        "activate",
+        "apply-spectrum",
+        "deactivate",
+        "record-evidence",
+        "save",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/alpr",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-av-ai-stream": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/ai/stream",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-audio-library-save": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/audio-library/save",
+      "permission": "ave.control",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-audio-library-upload": {
+      "available": false,
+      "method": "POST",
+      "path": "/av-manager-api/audio-library/upload",
+      "permission": "ave.control",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint.",
+      "validation": "pending bench validation"
+    },
+    "post-av-camera-commission": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/camera-commission",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-camera-overlays": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/camera-overlays",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-channel": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/channel",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-channel-diagnostics": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/channel-diagnostics",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-channel-profile": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/channel-profile",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-device-action": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/device-action",
+      "permission": "ave.control",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-device-config": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/device-config",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-device-credentials": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/device-credentials",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-device-soft-buttons": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/device-soft-buttons",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-driver": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/driver",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-restart": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/restart",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-scan": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/scan",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-source-profile": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/source-profile",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-spectrum-update": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/spectrum-update",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-telemetry": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/telemetry",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-telemetry-config": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/telemetry-config",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-av-upload": {
+      "available": false,
+      "method": "POST",
+      "path": "/av-manager-api/upload",
+      "permission": "ave.manage",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint.",
+      "validation": "pending bench validation"
+    },
+    "post-av-write-env": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/write-env",
+      "permission": "ave.manage",
+      "transport": "json",
+      "validation": "pending bench validation"
+    },
+    "post-backup-upload": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/backup-upload",
+      "permission": "storage.manage",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint."
+    },
+    "post-device-info": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/device-info",
+      "permission": "settings.info.manage",
+      "transport": "json"
+    },
+    "post-eyeq-humon": {
+      "actions": [
+        "load",
+        "run-profile",
+        "run-suite",
+        "save-boldnet-mappings",
+        "save-config",
+        "status",
+        "submit-activation"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-humon",
+      "permission": "humon.manage",
+      "transport": "json"
+    },
+    "post-eyeq-vision": {
+      "actions": [
+        "camera-control",
+        "clear-default-preset",
+        "delete-control-unit",
+        "delete-preset",
+        "discover-control-units",
+        "ingest-event",
+        "load",
+        "load-preset",
+        "playback-session",
+        "playback-urls",
+        "recording-debug",
+        "save-control-unit",
+        "save-device-telemetry-config",
+        "save-layout",
+        "save-preset",
+        "send-frame-to-trainer",
+        "set-control-output",
+        "set-default-preset",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision",
+      "permission": "vision.manage",
+      "transport": "json"
+    },
+    "post-eyeq-vision-radar-tracking": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision/radar-tracking",
+      "permission": "vision.control",
+      "transport": "json"
+    },
+    "post-eyeq-vision-tracking-site": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision/tracking-site",
+      "permission": "vision.manage",
+      "transport": "json"
+    },
+    "post-fan-control": {
+      "actions": [
+        "restore",
+        "set-pwm",
+        "snapshot"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/fan-control",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "post-fan-policy": {
+      "actions": [
+        "apply",
+        "case-mode",
+        "set-case-mode",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/fan-policy",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "post-feature-modules": {
+      "actions": [
+        "activate",
+        "deactivate",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/feature-modules",
+      "permission": "settings.features.manage",
+      "transport": "json"
+    },
+    "post-front-panel": {
+      "actions": [
+        "clear-shutdown-state",
+        "disable-alerts"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/front-panel",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "post-hailo-model-zoo": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/hailo-model-zoo",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-hailo-plugin-settings": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/hailo-plugin/settings",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-hailo-taxonomy": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/hailo-taxonomy",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-lpr-test-video": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/lpr-test-video",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-model-chains": {
+      "actions": [
+        "evaluate-context",
+        "reset-default",
+        "run-automation-once",
+        "run-context",
+        "save",
+        "validate"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/model-chains",
+      "permission": "ai.manage",
+      "transport": "json"
+    },
+    "post-network-security": {
+      "actions": [
+        "disable-onvif-broadcast",
+        "enable-onvif-broadcast",
+        "save",
+        "set-onvif-broadcast",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/network-security",
+      "permission": "settings.network.manage",
+      "transport": "json"
+    },
+    "post-network-watchdog": {
+      "actions": [
+        "apply-network-config",
+        "recover-now",
+        "save-network-config"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/network-watchdog",
+      "permission": "settings.network.manage",
+      "transport": "json"
+    },
+    "post-notifications": {
+      "actions": [
+        "automation-status",
+        "delete-device",
+        "delete-rule",
+        "delete-schedule",
+        "evaluate-event",
+        "ingest-event",
+        "load",
+        "record-event",
+        "save-rule",
+        "save-schedule",
+        "status",
+        "subscribe-device",
+        "test-notification",
+        "unsubscribe-device",
+        "upsert-device"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/notifications",
+      "permission": "notifications.manage",
+      "transport": "json"
+    },
+    "post-offsite-backups": {
+      "actions": [
+        "delete-remote",
+        "save-remote",
+        "start-backup",
+        "test-remote"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/offsite-backups",
+      "permission": "storage.manage",
+      "transport": "json"
+    },
+    "post-power-control": {
+      "actions": [
+        "reboot",
+        "refresh-policy",
+        "set-power-button-policy",
+        "shutdown"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/power-control",
+      "permission": "settings.power.manage",
+      "transport": "json"
+    },
+    "post-raid-action": {
+      "actions": [
+        "add",
+        "assemble-scan",
+        "backup-create",
+        "backup-list",
+        "backup-restore",
+        "backup-validate-restore",
+        "backup-verify",
+        "create",
+        "external-list",
+        "external-mount",
+        "external-unmount",
+        "fail",
+        "format",
+        "mount",
+        "mount-config",
+        "partition",
+        "promote-recording-target",
+        "remove",
+        "save-mount",
+        "stop",
+        "unmount",
+        "wipefs",
+        "zero-superblock"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/raid/action",
+      "permission": "storage.manage",
+      "transport": "json"
+    },
+    "post-smart-scan": {
+      "actions": [
+        "start",
+        "status"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/smart-scan",
+      "permission": "storage.manage",
+      "transport": "json"
+    },
+    "post-spectrum-connection": {
+      "actions": [
+        "save",
+        "test"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/spectrum-connection",
+      "permission": "settings.users.manage",
+      "transport": "json"
+    },
+    "post-spectrum-recordings": {
+      "actions": [
+        "apply",
+        "backup",
+        "enroll_ave",
+        "refresh",
+        "status",
+        "use_raid"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/spectrum-recordings",
+      "permission": "ave.manage",
+      "transport": "json"
+    },
+    "post-support": {
+      "actions": [
+        "submit"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/support",
+      "permission": "support.submit",
+      "transport": "json"
+    },
+    "post-support-attachment": {
+      "available": false,
+      "method": "POST",
+      "path": "/appliance-api/support/attachment",
+      "permission": "support.submit",
+      "transport": "https-media",
+      "unavailable_reason": "Use the authenticated HTTPS media endpoint."
+    },
+    "post-user-access": {
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/user-access",
+      "permission": "settings.users.manage",
+      "transport": "json"
+    },
+    "post-workload-governor": {
+      "actions": [
+        "clear-override",
+        "force-state",
+        "save-policy",
+        "set-enabled"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/workload-governor",
+      "permission": "settings.health.manage",
+      "transport": "json"
+    },
+    "post-zensornet": {
+      "actions": [
+        "backfill-telemetry",
+        "enroll",
+        "gateway-command",
+        "gateway-diag",
+        "gateway-events",
+        "gateway-firmware",
+        "gateway-flash",
+        "ingest-sample",
+        "load",
+        "relay-command",
+        "remove-sensor",
+        "save-config",
+        "save-gateway-config",
+        "save-retention",
+        "save-visualizer",
+        "sensor-command",
+        "sensor-settings",
+        "status",
+        "sync",
+        "update-sensor"
+      ],
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/zensornet",
+      "permission": "zensornet.manage",
+      "transport": "json"
+    },
+    "power": {
+      "alias_of": "post-power-control",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/power-control",
+      "permission": "settings.power.manage",
+      "transport": "json"
+    },
+    "recording": {
+      "alias_of": "post-spectrum-recordings",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/spectrum-recordings",
+      "permission": "ave.manage",
+      "transport": "json"
+    },
+    "telemetry": {
+      "available": true,
+      "method": "POST",
+      "path": "/av-manager-api/telemetry",
+      "permission": "ave.manage",
+      "transport": "json"
+    },
+    "tracking": {
+      "alias_of": "post-eyeq-vision-radar-tracking",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision/radar-tracking",
+      "permission": "vision.control",
+      "transport": "json"
+    },
+    "vision": {
+      "alias_of": "post-eyeq-vision",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/eyeq-vision",
+      "permission": "vision.manage",
+      "transport": "json"
+    },
+    "zensornet": {
+      "alias_of": "post-zensornet",
+      "available": true,
+      "method": "POST",
+      "path": "/appliance-api/zensornet",
+      "permission": "zensornet.manage",
+      "transport": "json"
+    }
+  }
+}
