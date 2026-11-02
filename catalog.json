@@ -3492,7 +3492,10 @@
       "scope": "ai6:hardware",
       "category": "Hardware and power",
       "authentication": "Bearer token",
-      "name": "block devices"
+      "name": "block devices",
+      "response_notes": [
+        "For confirmed recording layouts, slots[].expected identifies bays required by independent single-disk/JBOD or RAID recording groups. An empty optional bay does not imply a missing required member."
+      ]
     },
     {
       "method": "GET",
@@ -3547,7 +3550,10 @@
       "scope": "ai6:hardware",
       "category": "Hardware and power",
       "authentication": "Bearer token",
-      "name": "health"
+      "name": "health",
+      "response_notes": [
+        "HTTP success and ok indicate that a front-panel snapshot exists. Check overall and GET /front-panel-api/status for actual disk, RAID and recording-storage health."
+      ]
     },
     {
       "method": "GET",
@@ -3599,7 +3605,12 @@
       "scope": "ai6:hardware",
       "category": "Hardware and power",
       "authentication": "Bearer token",
-      "name": "status"
+      "name": "status",
+      "response_notes": [
+        "On systems with a confirmed recording layout, disk status follows each independent single-disk/JBOD volume or RAID group in its physical bays. Empty unassigned bays are off; a missing previously confirmed member remains a fault.",
+        "Recording checks use Spectrum recording mounts and enabled storage, including write verification and current media activity. A successful health HTTP request alone does not prove recording.",
+        "Green indicates a healthy confirmed member; blinking white indicates attention or an unconfirmed present disk; red indicates a critical disk, RAID or recording-storage fault. Inspect disks[].reason, raid_alert.reasons and overall for the cause."
+      ]
     },
     {
       "method": "GET",
