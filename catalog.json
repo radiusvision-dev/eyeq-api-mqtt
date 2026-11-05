@@ -1,7 +1,7 @@
 {
   "title": "EyeQ API and MQTT",
   "system": "EyeQ Spectrum Systems",
-  "edition": "2026-10-28",
+  "edition": "2026-11-05",
   "https": [
     {
       "method": "GET",
@@ -1245,13 +1245,15 @@
       "mqtt": [
         {
           "operation": "get-access-doors",
-          "available": false
+          "available": true
         }
       ],
-      "available": false,
+      "available": true,
       "permission": "pacs.view",
       "actions": [],
-      "fields": [],
+      "fields": [
+        "controller_id"
+      ],
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
@@ -1263,13 +1265,26 @@
       "mqtt": [
         {
           "operation": "post-access-door-command",
-          "available": false
+          "available": true
         }
       ],
-      "available": false,
+      "available": true,
       "permission": "pacs.doors.operate",
-      "actions": [],
-      "fields": [],
+      "actions": [
+        "unlock",
+        "lock"
+      ],
+      "fields": [
+        "controller_id",
+        "request_id",
+        "action",
+        "binding_revision",
+        "issued_at",
+        "expires_at",
+        "confirm",
+        "duration_seconds",
+        "person_id"
+      ],
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
@@ -1330,9 +1345,11 @@
       "actions": [],
       "fields": [
         "controller_id",
+        "site_id",
         "person_id",
-        "after",
-        "limit"
+        "before",
+        "limit",
+        "view"
       ],
       "scope": "ai6:read",
       "category": "Access Control",
@@ -5156,6 +5173,46 @@
           "zensor_id"
         ]
       }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors/{door_id}/state",
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "get-access-door-state",
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "mqtt": [
+        {
+          "operation": "get-access-door-state",
+          "available": true
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors/{door_id}/commands/{request_id}",
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "get-access-door-command-status",
+      "available": true,
+      "permission": "pacs.doors.operate",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "mqtt": [
+        {
+          "operation": "get-access-door-command-status",
+          "available": true
+        }
+      ]
     }
   ],
   "mqtt_operations": {
@@ -5269,15 +5326,39 @@
       "sensitive_result": false,
       "transport": "json"
     },
+    "get-access-door-command-status": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors/{door_id}/commands/{request_id}",
+      "path_parameters": [
+        "door_id",
+        "request_id"
+      ],
+      "permission": "pacs.doors.operate",
+      "resource_scope": "physical-access",
+      "transport": "json",
+      "sensitive_result": false
+    },
+    "get-access-door-state": {
+      "available": true,
+      "method": "GET",
+      "path": "/appliance-api/physical-access/doors/{door_id}/state",
+      "path_parameters": [
+        "door_id"
+      ],
+      "permission": "pacs.view",
+      "resource_scope": "physical-access",
+      "transport": "json",
+      "sensitive_result": false
+    },
     "get-access-doors": {
-      "available": false,
+      "available": true,
       "method": "GET",
       "path": "/appliance-api/physical-access/doors",
       "permission": "pacs.view",
       "resource_scope": "physical-access",
       "sensitive_result": false,
-      "transport": "json",
-      "unavailable_reason": "Not available in this API edition."
+      "transport": "json"
     },
     "get-access-events": {
       "available": true,
@@ -5900,12 +5981,20 @@
       "unavailable_reason": "Not available in this API edition."
     },
     "post-access-door-command": {
-      "available": false,
+      "available": true,
       "method": "POST",
       "path": "/appliance-api/physical-access/doors/{door_id}/commands",
       "permission": "pacs.doors.operate",
       "transport": "json",
-      "unavailable_reason": "Not available in this API edition."
+      "resource_scope": "physical-access",
+      "path_parameters": [
+        "door_id"
+      ],
+      "actions": [
+        "unlock",
+        "lock"
+      ],
+      "sensitive_result": false
     },
     "post-access-events-sync": {
       "available": true,
