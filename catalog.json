@@ -3792,6 +3792,7 @@
       "path": "/appliance-api/mqtt",
       "fields": [
         "action",
+        "command_connections",
         "controls",
         "enabled",
         "label",
@@ -6733,5 +6734,34 @@
       "permission": "zensornet.manage",
       "transport": "json"
     }
+  },
+  "external_command_connections": {
+    "version": "2026-11-05",
+    "optional": true,
+    "default_enabled": false,
+    "settings_path": "/appliance-api/mqtt",
+    "command_topic": "{namespace}/commands/{operation}",
+    "result_topic": "{namespace}/results",
+    "configuration_fields": [
+      "id",
+      "enabled",
+      "host",
+      "port",
+      "username",
+      "password",
+      "ca_file",
+      "cert_file",
+      "key_file",
+      "namespace",
+      "client_id",
+      "controls"
+    ],
+    "maximum_connections": 8,
+    "maximum_command_lifetime_seconds": 60,
+    "mqtt_version": 5,
+    "minimum_tls_version": "1.2",
+    "retained_commands": false,
+    "authority": "Intersection of configured operations and bound local MQTT identity controls plus native API/resource grants",
+    "deduplication": "Shared local identity and envelope id across local and external transports"
   }
 }
