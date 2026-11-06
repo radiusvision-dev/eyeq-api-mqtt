@@ -2278,6 +2278,14 @@
         "ptz_autotrack_enable",
         "ptz_center",
         "ptz_home",
+        "ptz_move_down",
+        "ptz_move_down_left",
+        "ptz_move_down_right",
+        "ptz_move_left",
+        "ptz_move_right",
+        "ptz_move_up",
+        "ptz_move_up_left",
+        "ptz_move_up_right",
         "ptz_position_get",
         "ptz_preset_goto",
         "ptz_preset_list",
@@ -2324,6 +2332,7 @@
         "imagewidth",
         "name",
         "preset",
+        "preset_token",
         "ptz_speed",
         "query",
         "soundfile",
@@ -6763,5 +6772,52 @@
     "retained_commands": false,
     "authority": "Intersection of configured operations and bound local MQTT identity controls plus native API/resource grants",
     "deduplication": "Shared local identity and envelope id across local and external transports"
+  },
+  "camera_control_profiles": {
+    "selection_fields": [
+      "control_profile_variant",
+      "control_profile_mode"
+    ],
+    "profiles": [
+      {
+        "value": "axis-vapix-ptz",
+        "description": "Axis mechanical PTZ; controls depend on verified device capabilities."
+      },
+      {
+        "value": "axis-fixed",
+        "description": "Axis fixed panoramic imager; no mechanical PTZ advertised."
+      },
+      {
+        "value": "axis-speaker",
+        "description": "Axis network audio; clip controls, no camera optics or PTZ."
+      },
+      {
+        "value": "mobotix-classic",
+        "description": "MOBOTIX classic fixed camera; no mechanical PTZ advertised."
+      },
+      {
+        "value": "onvif-ptz",
+        "description": "Capability-verified ONVIF PTZ; motion requires separate commissioning. Status, preset listing and Stop do not commission movement."
+      }
+    ],
+    "generic_onvif": {
+      "read_actions": [
+        "ptz_position_get",
+        "ptz_preset_list"
+      ],
+      "stop_action": "ptz_stop",
+      "motion_requires": "Separately commissioned camera motion compatibility and advertised operation/coordinate-space support.",
+      "result_fields": [
+        "command_acknowledged",
+        "movement_verified",
+        "readback",
+        "readback_unavailable",
+        "coordinate_system"
+      ],
+      "position_units": "ONVIF-normalized, not Axis degrees.",
+      "acknowledgement_limit": "A command acknowledgement or position readback does not establish visual centering or physical completion.",
+      "unsupported": "Wiper, optics, reboot and vendor-specific controls are not inferred from ONVIF compatibility."
+    },
+    "audio_preference": "An explicitly disabled channel audio preference remains disabled during source regeneration. Enable audio explicitly when required."
   }
 }
