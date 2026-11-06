@@ -6819,6 +6819,7 @@
       "unsupported": "Wiper, optics, reboot and vendor-specific controls are not inferred from ONVIF compatibility."
     },
     "audio_preference": "An explicitly disabled channel audio preference remains disabled during source regeneration. Enable audio explicitly when required.",
-    "audio_only_channels": "A network-audio channel may display a status card rather than a camera image. An available audio source is distinct from verified speaker playback or talkback."
+    "audio_only_channels": "A network-audio channel may display a status card rather than a camera image. An available audio source is distinct from verified speaker playback or talkback. Speaker control requires saved credentials for that same device.",
+    "channel_routing": "Commands addressed by channel use that channel's selected model-specific adapter. An unsupported channel does not fall back to another PTZ."
   }
 }
