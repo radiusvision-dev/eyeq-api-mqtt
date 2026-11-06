@@ -6834,7 +6834,7 @@
       },
       {
         "value": "onvif-ptz",
-        "description": "Capability-verified ONVIF PTZ; motion requires separate commissioning. Status, preset listing and Stop do not commission movement."
+        "description": "Capability-verified ONVIF PTZ; motion requires separate commissioning. Status, preset listing and Stop do not commission movement. Commissioned Imporx joystick and optical zoom pulses return command_acknowledged and stop_acknowledged. Camera-reported position is unverified (position_verified: false). Home and preset recall require independent validation."
       }
     ],
     "generic_onvif": {
