@@ -2813,7 +2813,30 @@
       "scope": "ai6:eyeq-vision",
       "category": "EyeQ vision and radar",
       "authentication": "Bearer token",
-      "name": "eyeq vision"
+      "name": "eyeq vision",
+      "query_parameters": {
+        "mode": "live or playback",
+        "start": "Window start, Unix milliseconds",
+        "end": "Window end, Unix milliseconds",
+        "playhead": "Shared video/sensor position, Unix milliseconds",
+        "windowMinutes": "5\u20131440",
+        "eventLimit": "0\u20131000; bounded newest events in the window",
+        "compact": "1 for compact event payloads",
+        "recordings": "1 to include available archive coverage"
+      },
+      "response_fields": {
+        "events": "Merged Vision, enrolled Zensor, site operational and recorded analytics events; telemetry polling and account audit noise are excluded from site history. Results are bounded by eventLimit.",
+        "events[].id": "Stable event or analytics-track identity",
+        "events[].ts_ms": "Original event/track start in Unix milliseconds",
+        "events[].cameraId": "Spectrum camera identifier when known",
+        "events[].device_id": "Camera hardware identity when provided",
+        "events[].channel": "EyeQ channel when explicitly provided",
+        "events[].source": "Producer, including eyeq-hailo or camera-analytics",
+        "events[].startMs": "Analytics track start when present",
+        "events[].endMs": "Analytics track end when present",
+        "eventFeeds.siteHistory": "status: available, degraded, unavailable or not-requested; may include malformedSkipped, limit, truncated and reason",
+        "eventFeeds.recordedAnalytics": "Same feed health fields for recorded camera/Hailo analytics; unavailable is not an empty healthy feed"
+      }
     },
     {
       "method": "POST",
@@ -2990,7 +3013,17 @@
           "surface"
         ],
         "ingest-event": [
-          "event"
+          "event.id",
+          "event.ts_ms",
+          "event.source",
+          "event.source_id",
+          "event.cameraId",
+          "event.device_id",
+          "event.channel",
+          "event.event_type",
+          "event.description",
+          "event.state",
+          "event.severity"
         ],
         "playback-urls": [
           "cameraId",
@@ -3012,6 +3045,10 @@
         ],
         "set-control-output": [],
         "camera-control": []
+      },
+      "layout_extensions": {
+        "canvas.items[].kind=site-events": "Site Events special-function tile; click-to-play uses the shared timeline and only visible video tiles. Existing layout/preset authentication and permissions apply.",
+        "canvas.items[].settings.audioInputSourceId=none": "Explicitly disable listening for an audio-playout tile instead of selecting another available microphone."
       }
     },
     {
