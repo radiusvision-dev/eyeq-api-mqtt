@@ -2837,6 +2837,31 @@
         "events[].endMs": "Analytics track end when present",
         "eventFeeds.siteHistory": "status: available, degraded, unavailable or not-requested; may include malformedSkipped, limit, truncated and reason",
         "eventFeeds.recordedAnalytics": "Same feed health fields for recorded camera/Hailo analytics; unavailable is not an empty healthy feed"
+      },
+      "site_telemetry": {
+        "field": "siteTelemetry",
+        "permission": "vision.view",
+        "mqtt_operation": "get-eyeq-vision",
+        "providers": [
+          "nextcentury",
+          "tempest"
+        ],
+        "fields": [
+          "provider",
+          "position_ms",
+          "window_start_ms",
+          "health",
+          "meters",
+          "weather",
+          "site",
+          "owner"
+        ],
+        "meters": "id, device_id, label, building, utility_type, unit_code, multiplier, imr, model, reading, age_seconds, status, window_pulses, reset_intervals, gap_intervals, samples_in_window, series",
+        "reading": "ts_ms, event_id, source, pulseCount, resetCount, temperature (C), linkQuality (raw), batteryLevel (raw), batteryCapacity (raw), batteryVoltage (raw), battery_percent, multiplier, usage (vendor value), unit_code",
+        "owner": "Live or playback calendar periods day/week/month/year in site timezone, Monday-start weeks. Each includes start, end, total_kwh, contributing_meters, configured_meters, average_kwh_per_meter, average_kwh_per_elapsed_day, top_consumers, meters, series, excluded_intervals. as_of_ms identifies the observation cutoff. annual lists observed yearly totals up to that cutoff; history lists first_ms, last_ms, observations.",
+        "limits": "Missing readings are null. Stale meters exceed three hours. Reset/decreasing counters, conversion changes and intervals exceeding 24 hours are excluded from owner usage. Legacy conversion uses current verified units where historical metadata is absent. Totals cover observed intervals and can overlap between shared and tenant meters. No billing accuracy or instantaneous watts is asserted.",
+        "weather": "Owner-authorized Tempest station only. Weather is null until observations exist. Fields include station_id, ts_ms, source, age_seconds, stale, air_temperature (C), relative_humidity (%), station_pressure and sea_level_pressure (mb), wind_avg and wind_gust (m/s), wind_direction (degrees), solar_radiation (W/m2), uv, precip_accum_local_day (mm), lightning_strike_count_last_1hr.",
+        "history": "Meter observations follow the requested playback position. Owner calendar summaries and rankings follow the playhead and exclude later observations. Active inventory labels describe current assignments. Meter history retention is indefinite until an operator changes the policy."
       }
     },
     {
