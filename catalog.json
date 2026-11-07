@@ -5468,7 +5468,7 @@
         "max_duration_seconds": 120,
         "idle_expiry_seconds": 5
       },
-      "notes": "Browser-session media only; not available through bearer-agent or MQTT commands. Successful device acknowledgement is not acoustic confirmation."
+      "notes": "Browser-session media only; not available through bearer-agent or MQTT commands. Successful socket writes confirm transport only, not device playback or acoustic confirmation."
     },
     {
       "method": "POST",
