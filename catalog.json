@@ -2844,7 +2844,8 @@
         "mqtt_operation": "get-eyeq-vision",
         "providers": [
           "nextcentury",
-          "tempest"
+          "tempest",
+          "tempest-local-udp"
         ],
         "fields": [
           "provider",
@@ -2860,9 +2861,33 @@
         "reading": "ts_ms, event_id, source, pulseCount, resetCount, temperature (C), linkQuality (raw), batteryLevel (raw), batteryCapacity (raw), batteryVoltage (raw), battery_percent, multiplier, usage (vendor value), unit_code",
         "owner": "Live or playback calendar periods day/week/month/year in site timezone, Monday-start weeks. Each includes start, end, total_kwh, contributing_meters, configured_meters, average_kwh_per_meter, average_kwh_per_elapsed_day, top_consumers, meters, series, excluded_intervals. as_of_ms identifies the observation cutoff. annual lists observed yearly totals up to that cutoff; history lists first_ms, last_ms, observations.",
         "limits": "Missing readings are null. Stale meters exceed three hours. Reset/decreasing counters, conversion changes and intervals exceeding 24 hours are excluded from owner usage. Legacy conversion uses current verified units where historical metadata is absent. Totals cover observed intervals and can overlap between shared and tenant meters. No billing accuracy or instantaneous watts is asserted.",
-        "weather": "Owner-authorized Tempest station only. Weather is null until observations exist. Fields include station_id, ts_ms, source, age_seconds, stale, air_temperature (C), relative_humidity (%), station_pressure and sea_level_pressure (mb), wind_avg and wind_gust (m/s), wind_direction (degrees), solar_radiation (W/m2), uv, precip_accum_local_day (mm), lightning_strike_count_last_1hr.",
-        "history": "Meter observations follow the requested playback position. Owner calendar summaries and rankings follow the playhead and exclude later observations. Active inventory labels describe current assignments. Meter history retention is indefinite until an operator changes the policy."
-      }
+        "weather": "Configured Tempest cloud or local UDP observations. Null until observations exist. Common fields: station_id, ts_ms (Unix milliseconds), source, age_seconds, stale, air_temperature (C), relative_humidity (%), wind_avg/wind_gust (m/s), wind_direction (degrees), solar_radiation (W/m2), uv. Local UDP adds station_pressure (mb), rain_interval_mm (previous-minute rain), battery_voltage, lightning_strike_count, lightning_strike_avg_distance (km), report_interval_minutes, event_id, hub_serial, device_serial, received_at_ms and authentication=unauthenticated-lan. Local UDP does not supply sea-level pressure or daily accumulated rain. Cloud-only fields are present only when supplied by that source.",
+        "history": "Meter observations follow the requested playback position. Owner calendar summaries and rankings follow the playhead and exclude later observations. Active inventory labels describe current assignments. Meter history retention is indefinite until an operator changes the policy. Weather playback selects the most recent full observation at or before the requested playhead; stale is true when that observation is more than 15 minutes older than the playhead. Local history begins when collection starts; UDP cannot retrieve missed past observations.",
+        "weather_events": {
+          "topic": "eyeq/site/{site}/events/weather/event",
+          "permission": "MQTT read_topics grant for this topic; external forwarding requires selecting the corresponding weather event stream",
+          "types": [
+            "weather.obs_st",
+            "weather.hub_status",
+            "weather.device_status",
+            "weather.evt_precip",
+            "weather.evt_strike"
+          ],
+          "envelope": [
+            "event_id",
+            "ts_ms",
+            "type",
+            "severity",
+            "source",
+            "payload",
+            "site_id"
+          ],
+          "cadence": "Source-driven: normally one full observation per minute, hub/device status at their reporting cadence, and rain-start/lightning events when observed. Rapid-wind samples are retained locally and do not produce per-sample MQTT messages.",
+          "delivery": "Non-retained events; deduplicate by event_id. MQTT reconnects do not prove continuous station coverage.",
+          "trust": "Hub IP and serial identities are allowlisted, but local UDP has no cryptographic sender authentication. Sensor timestamps describe observations; received_at_ms describes ingestion."
+        }
+      },
+      "weatherflow": "Current WeatherFlow Tempest configuration and enabled/configured state, model and local-udp transport. Source IP, serials, MAC and receiving interface are visible with vision.view. siteTelemetry.health.tempest_local supplies observation health and last packet/source timestamps. Use weather timestamps and freshness to evaluate historical observations."
     },
     {
       "method": "POST",
@@ -2898,7 +2923,8 @@
         "send-frame-to-trainer",
         "set-control-output",
         "set-default-preset",
-        "status"
+        "status",
+        "configure-weatherflow"
       ],
       "fields": [
         "action",
@@ -3075,6 +3101,23 @@
       "layout_extensions": {
         "canvas.items[].kind=site-events": "Site Events special-function tile; click-to-play uses the shared timeline and only visible video tiles. Existing layout/preset authentication and permissions apply.",
         "canvas.items[].settings.audioInputSourceId=none": "Explicitly disable listening for an audio-playout tile instead of selecting another available microphone."
+      },
+      "weatherflow_configuration": {
+        "action": "configure-weatherflow",
+        "permission": "vision.manage",
+        "request": {
+          "action": "configure-weatherflow",
+          "settings": {
+            "enabled": true,
+            "hub_ip": "<hub IPv4 address>",
+            "hub_serial": "HB-<digits>",
+            "device_serial": "ST-<digits>",
+            "hub_mac": "<hub MAC address>",
+            "interface": "<receiving Ethernet interface>"
+          }
+        },
+        "response": "ok, weatherflow (saved settings, configured, model, transport), message",
+        "rules": "Settings replace the integration configuration atomically. Boolean enabled is required; all identity fields must be valid. Unknown fields are rejected. Changes apply within 30 seconds. Disabling stops new ingestion and removes the hub broadcast allowance, preserving history and pending event delivery. One commissioned WeatherFlow Tempest hub per EyeQ Spectrum System."
       }
     },
     {

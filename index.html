@@ -117,6 +117,33 @@ mosquitto_pub -h &quot;&lt;mqtt-host&gt;&quot; -p 8883 \
  "owner":{"periods":{"day":{"total_kwh":84.5,"contributing_meters":10,
  "configured_meters":12,"average_kwh_per_meter":8.45,"excluded_intervals":1}}},
  "weather":null}</code></pre>
+<h3>WeatherFlow Tempest integration</h3>
+<p>The <strong>WeatherFlow Tempest</strong> Vision special function follows the shared live/playback timeline. Integration settings are under <strong>Vision → Editor → Integrations · WeatherFlow Tempest</strong>. One commissioned hub is supported per EyeQ Spectrum System. Reading configuration requires <code>vision.view</code>; changes require <code>vision.manage</code>. The MQTT equivalent uses the existing <code>post-eyeq-vision</code> operation and command authorization.</p>
+<pre><code>curl -sS -X POST -H "Authorization: Bearer $EYEQ_TOKEN" \
+  -H "Content-Type: application/json" \
+  "$EYEQ_ORIGIN/appliance-api/eyeq-vision" \
+  --data '{"action":"configure-weatherflow","settings":{
+    "enabled":true,"hub_ip":"&lt;hub IPv4 address&gt;","hub_serial":"HB-&lt;digits&gt;",
+    "device_serial":"ST-&lt;digits&gt;","hub_mac":"&lt;hub MAC address&gt;",
+    "interface":"&lt;receiving Ethernet interface&gt;"}}'
+# Successful response (configuration values omitted):
+{"ok":true,"weatherflow":{"enabled":true,"configured":true,
+ "model":"WeatherFlow Tempest","transport":"local-udp"},
+ "message":"Saved. Collector and firewall apply changes within 30 seconds; history is preserved."}</code></pre>
+<p>Supply every setting; unknown fields or invalid identities are rejected without replacing the previous configuration. To disable, send the same settings with <code>enabled:false</code>. This stops new observations and removes the hub’s broadcast allowance within 30 seconds; it preserves history and delivery of already-queued events. Local weather collection does not require a cloud account.</p>
+<h3>Local weather observations and MQTT events</h3>
+<p>EyeQ Spectrum Systems can collect a configured Tempest hub’s local UDP observations without a cloud token. <code>siteTelemetry.weather</code> returns the latest full observation at or before the requested playhead. <code>source</code> is <code>tempest-local-udp</code>; <code>ts_ms</code> is the sensor timestamp and <code>received_at_ms</code> is ingestion time. Weather is null before the first observation and marked stale when more than 15 minutes older than the playhead. Local collection cannot recover observations missed before ingestion began or during a network gap.</p>
+<p>Local fields include temperature (°C), relative humidity (%), wind average/gust (m/s), direction (degrees), station pressure (mb), UV, solar radiation (W/m²), battery voltage, lightning count/distance and <code>rain_interval_mm</code> (rain during the previous minute). Daily accumulated rain and sea-level pressure are not supplied by this local source. Hub addresses and serial identities are allowlisted, but UDP has no cryptographic authentication; <code>authentication</code> is <code>unauthenticated-lan</code>.</p>
+<p>Grant read access to <code>eyeq/site/{site}/events/weather/event</code> to receive full observations, hub/device status, rain-start and lightning events. Typical full observations arrive once per minute; status and events follow the source cadence. Rapid-wind samples are retained locally, without per-sample MQTT publication. These events are non-retained; deduplicate on <code>event_id</code>. Select the weather event stream separately when configuring external forwarding.</p>
+<pre><code>mosquitto_sub -h "$EYEQ_MQTT_HOST" -p 8883 --cafile "$CA_FILE" \
+  -u "$MQTT_USER" -P "$MQTT_PASSWORD" -q 1 \
+  -t "eyeq/site/$SITE/events/weather/event"
+# Abbreviated example; actual values and identifiers vary:
+{"event_id":"weather-...","ts_ms":1794000000000,"type":"weather.obs_st",
+ "source":{"system":"weather","device_id":"ST-EXAMPLE"},"severity":"info",
+ "payload":{"source":"tempest-local-udp","authentication":"unauthenticated-lan",
+ "ts_ms":1794000000000,"air_temperature":20.1,"relative_humidity":65,
+ "wind_avg":1.8,"wind_gust":2.9,"station_pressure":1005.2,"rain_interval_mm":0}}</code></pre>
 <p><code>meters</code> contains stable meter IDs, labels, buildings, utility and unit codes, configuration, latest timestamped readings, freshness, pulse changes and bounded trends. Temperature is °C. <code>battery_percent</code> decodes the vendor level; <code>batteryCapacity</code>, <code>batteryVoltage</code>, and <code>linkQuality</code> retain raw diagnostic values. Missing values are null. A meter becomes stale after three hours without a source observation.</p>
 <p>In Live and Playback modes, <code>owner.periods</code> provides <code>day</code>, <code>week</code>, <code>month</code> and <code>year</code> totals, per-meter averages, averages per elapsed day, top consumers, daily series, contributing-meter counts and excluded intervals. Weeks start Monday in the site timezone. <code>owner.annual</code> and <code>owner.history</code> describe retained yearly totals and observation coverage. Usage uses cumulative kWh differences, with resets, decreasing counters, unit or multiplier changes and gaps longer than 24 hours excluded. Intervals are assigned to their ending local date. Legacy records use verified current conversion metadata where historical metadata is absent. Shared and tenant submeters may overlap electrically. Totals cover observed intervals and require reconciliation before billing use.</p>
 <pre><code># Select a historical instant (Unix milliseconds):
