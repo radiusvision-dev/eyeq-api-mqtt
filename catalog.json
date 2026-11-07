@@ -5390,6 +5390,36 @@
           "available": true
         }
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/site-invitations",
+      "mqtt": [],
+      "available": true,
+      "permission": "Current site administrator",
+      "actions": [],
+      "fields": [],
+      "scope": "Own EyeQ Spectrum Systems only",
+      "category": "Portal user invitations",
+      "authentication": "Portal session and CSRF for POST",
+      "name": "Site-scoped invitations"
+    },
+    {
+      "method": "POST",
+      "path": "/api/site-invitations",
+      "mqtt": [],
+      "available": true,
+      "permission": "Current site administrator",
+      "actions": [],
+      "fields": [
+        "device_uuid",
+        "recipient_email",
+        "recipient_name"
+      ],
+      "scope": "Own EyeQ Spectrum Systems only",
+      "category": "Portal user invitations",
+      "authentication": "Portal session and CSRF for POST",
+      "name": "Site-scoped invitations"
     }
   ],
   "mqtt_operations": {
@@ -7099,5 +7129,40 @@
     "type": "array of 1\u201364 exact event type names; omit for all types on selected topics",
     "combination": "Both topic filters and event_types must match. Local event publishing is unchanged.",
     "held_status": "MQTT status includes held entries by destination, reason and count, separate from eligible pending copies. Excluded previously queued copies remain durable with policy_hold and are not marked delivered or automatically replayed. Changing destination policy with outstanding copies requires explicit reconciliation."
+  },
+  "portal_site_invitations": {
+    "origin": "https://app.radiusvision.com",
+    "page": "/site-invitations",
+    "capabilities": "GET /api/site-invitations",
+    "create": "POST /api/site-invitations",
+    "authentication": "Signed-in portal session; POST also requires X-CSRF-Token from GET /api/me csrf_token.",
+    "authorization": "Current active site administrator membership for the exact selected EyeQ Spectrum System; current role/group bindings are rechecked. Portal administrator status is not granted.",
+    "create_fields": [
+      "device_uuid",
+      "recipient_email",
+      "recipient_name"
+    ],
+    "fixed_role": "live-operators",
+    "expires_days": 7,
+    "existing_accounts": "409; portal administrator review required. Existing access is not replaced.",
+    "pending_invites": "409; portal administrator review required.",
+    "response_fields": [
+      "ok",
+      "recipient_email",
+      "site",
+      "role",
+      "expires_days",
+      "email_sent"
+    ],
+    "errors": {
+      "400": "Invalid fields or unsupported role/access parameters",
+      "401": "Not signed in",
+      "403": "Site scope or CSRF denied",
+      "409": "Existing account or pending invitation",
+      "413": "Request exceeds 4096 bytes",
+      "502": "Email delivery unconfirmed; invitation retained, no automatic resend",
+      "503": "Invitation service unavailable"
+    },
+    "mqtt": "No MQTT operation; portal session endpoint only."
   }
 }
