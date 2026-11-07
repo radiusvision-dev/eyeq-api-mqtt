@@ -117,6 +117,23 @@ mosquitto_pub -h &quot;&lt;mqtt-host&gt;&quot; -p 8883 \
  "owner":{"periods":{"day":{"total_kwh":84.5,"contributing_meters":10,
  "configured_meters":12,"average_kwh_per_meter":8.45,"excluded_intervals":1}}},
  "weather":null}</code></pre>
+<h3>NextCentury and WeatherFlow periodic MQTT state</h3>
+<p>Administrators can configure an enabled MQTT account with the <code>get-eyeq-vision</code> grant, baseline <code>get-status</code> read access, and this state subscription. The same read permission covers current and historical meter readings, site totals, daily/weekly/monthly/yearly rankings and averages, meter temperature and available health measurements, and WeatherFlow observations.</p>
+<pre><code>{"operation":"get-eyeq-vision","interval":60,"params":{
+ "mode":"live","compact":"1","recordings":"0","eventLimit":"0","windowMinutes":"60"}}</code></pre>
+<p>Subscribe with your issued MQTT credentials over TLS to <code>eyeq/site/{site}/state/{user}/get-eyeq-vision</code>. Only the account’s own state topics are granted. Example with locally configured credentials:</p>
+<pre><code>mosquitto_sub -h "$MQTT_HOST" -p 8883 --cafile "$MQTT_CA" \
+  -u "$MQTT_USER" -P "$MQTT_PASSWORD" \
+  -t "eyeq/site/$SITE/state/$MQTT_USER/get-eyeq-vision"
+# Illustrative decoded response fragment, not a complete payload:
+{"operation":"get-eyeq-vision","observed_at":1794000000,"state":"completed",
+ "result":{"ok":true,"siteTelemetry":{"provider":"nextcentury",
+ "site":{"electric_meters":12,"fresh":10,"stale":2,"missing":0},
+ "owner":{"periods":{"day":{"total_kwh":84.5},"week":{"total_kwh":420.0},
+ "month":{"total_kwh":1850.0},"year":{"total_kwh":16200.0}}},
+ "weather":{"source":"tempest-local-udp","air_temperature":18.0,
+ "relative_humidity":72,"ts_ms":1793999980000}}}}</code></pre>
+<p>State messages are non-retained. Large responses arrive in the documented <code>chunk</code> envelope; reassemble by digest and index before parsing. <code>observed_at</code> is publication time in seconds; meter <code>reading.ts_ms</code> and weather <code>ts_ms</code> are observation times in milliseconds. Repeated state messages may contain the same readings: deduplicate using their source identities and timestamps. NextCentury currently reports through these state snapshots, not a dedicated per-meter event topic. WeatherFlow additionally publishes source-driven messages on <code>eyeq/site/{site}/events/weather/event</code>. Missing or stale readings are not zero usage. API temperatures are Celsius; Fahrenheit is <code>C × 9/5 + 32</code>.</p>
 <h3>WeatherFlow Tempest integration</h3>
 <p>The <strong>WeatherFlow Tempest</strong> Vision special function follows the shared live/playback timeline. Integration settings are under <strong>Vision → Editor → Integrations · WeatherFlow Tempest</strong>. One commissioned hub is supported per EyeQ Spectrum System. Reading configuration requires <code>vision.view</code>; changes require <code>vision.manage</code>. The MQTT equivalent uses the existing <code>post-eyeq-vision</code> operation and command authorization.</p>
 <pre><code>curl -sS -X POST -H "Authorization: Bearer $EYEQ_TOKEN" \

@@ -2885,6 +2885,24 @@
           "cadence": "Source-driven: normally one full observation per minute, hub/device status at their reporting cadence, and rain-start/lightning events when observed. Rapid-wind samples are retained locally and do not produce per-sample MQTT messages.",
           "delivery": "Non-retained events; deduplicate by event_id. MQTT reconnects do not prove continuous station coverage.",
           "trust": "Hub IP and serial identities are allowlisted, but local UDP has no cryptographic sender authentication. Sensor timestamps describe observations; received_at_ms describes ingestion."
+        },
+        "mqtt_state": {
+          "topic": "eyeq/site/{site}/state/{user}/get-eyeq-vision",
+          "authorization": "Enabled MQTT account with get-eyeq-vision and baseline get-status read permissions; subscribe to that account\u2019s own state topic.",
+          "configuration": {
+            "operation": "get-eyeq-vision",
+            "interval": 60,
+            "params": {
+              "mode": "live",
+              "compact": "1",
+              "recordings": "0",
+              "eventLimit": "0",
+              "windowMinutes": "60"
+            }
+          },
+          "payload": "operation, observed_at (Unix seconds), state, result. On completed responses, result.siteTelemetry contains NextCentury meters, site totals, owner day/week/month/year summaries and WeatherFlow observations.",
+          "cadence": "Administrator-configured periodic state, 30\u20133600 seconds. Publication time is not a new meter observation; use each reading.ts_ms and event_id. NextCentury currently uses state snapshots, not a dedicated per-meter event topic.",
+          "delivery": "Non-retained. Large snapshots are chunked base64-json: reassemble by sha256 and index, verify the digest, then parse the JSON. Missing publication is not zero usage. Subscribe before requesting data."
         }
       },
       "weatherflow": "Current WeatherFlow Tempest configuration and enabled/configured state, model and local-udp transport. Source IP, serials, MAC and receiving interface are visible with vision.view. siteTelemetry.health.tempest_local supplies observation health and last packet/source timestamps. Use weather timestamps and freshness to evaluate historical observations."
