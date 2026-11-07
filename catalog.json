@@ -7295,7 +7295,24 @@
     {
       "id": "developers",
       "name": "Developer",
-      "description": "Advanced Operator permissions plus API-grant management. A trusted privileged role: issued API grants can carry broad authority. Available only on commissioned systems."
+      "description": "Advanced Operator, API-grant management and scoped Access Control operations. Explicit current site/controller grants are required. PIN reveal/change remains Administrator-only. Excludes direct user, network, power, destructive storage, controller commissioning, firmware and factory-reset administration. API grants can carry broad authority; this remains a trusted privileged role.",
+      "access_control_permissions": [
+        "pacs.access.grant",
+        "pacs.audit.export",
+        "pacs.configuration.manage",
+        "pacs.connectors.manage",
+        "pacs.connectors.sync",
+        "pacs.connectors.test",
+        "pacs.connectors.view",
+        "pacs.credentials.manage",
+        "pacs.doors.operate",
+        "pacs.events.view",
+        "pacs.identifiers.manage",
+        "pacs.people.manage",
+        "pacs.people.view",
+        "pacs.policy.manage",
+        "pacs.view"
+      ]
     },
     {
       "id": "advanced-operators",
@@ -7307,5 +7324,36 @@
       "name": "Live Operator",
       "description": "Live viewing, playback, exports, PTZ, audio and permitted live controls, plus read-only health. No configuration or API-key administration."
     }
-  ]
+  ],
+  "vision_canvas_widgets": {
+    "kinds": [
+      "meter-summary",
+      "meter-trend",
+      "meter-ranking",
+      "meter-health",
+      "meter-directory",
+      "meter-history",
+      "access-history",
+      "site-events"
+    ],
+    "layout": "Independent items in layout.canvas.items; normal position, dimensions and settings apply.",
+    "permissions": {
+      "view": "vision.view",
+      "edit": "vision.manage"
+    },
+    "history": "Meter and access widgets follow the shared Vision playhead. Existing site-meters items remain supported."
+  },
+  "browser_access_control": {
+    "authentication": "Authenticated browser session with a trusted principal type, issuer and subject; request-body identities are never accepted.",
+    "mutation_csrf": "X-RadiusVision-CSRF must match the browser session CSRF token.",
+    "scope": "Role permission plus an unexpired site/controller grant. Administrator role alone does not grant every site.",
+    "pin": "PIN reveal and PIN change require Administrator role and pacs.credentials.manage plus controller scope. Revealed values must be hidden after the returned hide_after_seconds.",
+    "connection": "Controller management may require an explicit secure connection; the credential lease lasts ten minutes. A restart or expiry requires reconnecting. Local controller PIN validation is independent of that management session."
+  },
+  "api_access_settings": {
+    "location": "Settings \u2192 API & AI Agent Access",
+    "authentication": "Applications and AI agents use the same scoped, expiring bearer tokens.",
+    "access_control": "Select a token, site, controllers and explicit Access Control permissions. PIN administration requires an explicit delegation; ordinary tokens do not gain it automatically.",
+    "differences": "Interactive dashboard sessions use session authentication and CSRF. MQTT uses separate broker credentials and operation grants. Available operations still depend on token scopes, resource permissions and enabled services."
+  }
 }
