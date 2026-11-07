@@ -1,7 +1,7 @@
 {
   "title": "EyeQ API and MQTT",
   "system": "EyeQ Spectrum Systems",
-  "edition": "2026-11-05",
+  "edition": "2026-11-07",
   "https": [
     {
       "method": "GET",
@@ -7039,5 +7039,56 @@
       "Offline commands are not deferred for execution on reconnect."
     ]
   },
-  "session_compatibility": "Federated dashboard sessions must be bound to their configured identity-provider issuer. After an authentication compatibility update, older unbound sessions require sign-in again. Existing permissions and controller scopes are unchanged."
+  "session_compatibility": "Federated dashboard sessions must be bound to their configured identity-provider issuer. After an authentication compatibility update, older unbound sessions require sign-in again. Existing permissions and controller scopes are unchanged.",
+  "reader_access_events": {
+    "local_topic": "eyeq/site/{site}/events/access/audit",
+    "external_topic": "rv/site/{site}/access/audit",
+    "types": [
+      "access.reader.granted",
+      "access.reader.denied",
+      "access.reader.taken",
+      "access.reader.not_taken",
+      "access.reader.invalid"
+    ],
+    "payload_fields": [
+      "schema_version",
+      "controller_id",
+      "controller_name",
+      "reader_id",
+      "door_id",
+      "door_name",
+      "door_status",
+      "direction",
+      "access_method",
+      "result",
+      "person_id",
+      "customer_name",
+      "customer_phone",
+      "identity_status",
+      "details_basis",
+      "door_open_confirmed",
+      "access_site_id"
+    ],
+    "identity_status": [
+      "matched",
+      "details_unavailable",
+      "unmapped"
+    ],
+    "door_status": [
+      "mapped",
+      "unmapped"
+    ],
+    "privacy": "PINs, card values and raw reader metadata are never included. Customer details are matched by the exact credential reference within the same controller, never by entered PIN or reported holder name. Authorize audit topic subscribers and external destinations for customer personal information.",
+    "details_basis": "current_customer_record at collection time, persisted with the event; missing identity or door fields are null, never guessed.",
+    "access_method": [
+      "pin",
+      "card",
+      "unknown"
+    ],
+    "history_api": "GET /appliance-api/physical-access/history?view=access&include_people=1",
+    "history_authorization": "pacs.events.view plus current controller scope; person_name and person_phone additionally require pacs.people.view. History reads resolve current customer details; MQTT stores the event collection snapshot.",
+    "semantics": "granted means the controller granted access, not proof the door physically opened or a person entered. taken/not_taken are separate controller-reported outcomes; door_open_confirmed remains false without independent position confirmation.",
+    "delivery": "Stable event_id; QoS 1 downstream, possible duplicate delivery. Deduplicate by event_id. Fresh-only first activation; queued events remain retryable across restart. Invalid events emit a redacted diagnostic and do not block later reader events. Source identity changes or log gaps require reconciliation.",
+    "availability": "Requires an enabled, commissioned Axis A1601 event source and configured logical doors. A reader connected to an unmanaged controller is not observed by this integration."
+  }
 }
