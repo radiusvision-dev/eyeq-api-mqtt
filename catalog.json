@@ -7368,6 +7368,6 @@
     "door_access": "Uses existing scoped door inventory, state and command endpoints. Releases require explicit confirmation, current binding_revision, fresh request_id and lifetime, CSRF for dashboard sessions, and pacs.doors.operate. No automatic command retries. Controller state is not physical position.",
     "available": true,
     "availability_note": "Available on systems with the mobile Vision interface enabled. Saved mobile presets must be configured for the system.",
-    "camera_grid": "All Cameras offers a camera selector and Show All Cameras: a two-column scrolling native Vision grid using low-resolution streams, muted audio and visible-tile loading. Selecting one camera exits the grid. Desktop presets are unchanged."
+    "camera_grid": "All Cameras starts with a high-resolution selected camera and Fullscreen control. Show All Cameras toggles to a two-column scrolling grid of low-resolution muted streams; Show One Camera restores the selected high-resolution camera and dropdown. Tapping a grid tile opens that camera fullscreen in high resolution; Back to Grid restores the grid and scroll position. Fullscreen uses a viewport-filling fallback on browsers without native fullscreen. Desktop presets are unchanged."
   }
 }
