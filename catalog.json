@@ -7048,7 +7048,8 @@
       "access.reader.denied",
       "access.reader.taken",
       "access.reader.not_taken",
-      "access.reader.invalid"
+      "access.reader.invalid",
+      "access.reader.validation"
     ],
     "payload_fields": [
       "schema_version",
@@ -7088,7 +7089,15 @@
     "history_api": "GET /appliance-api/physical-access/history?view=access&include_people=1",
     "history_authorization": "pacs.events.view plus current controller scope; person_name and person_phone additionally require pacs.people.view. History reads resolve current customer details; MQTT stores the event collection snapshot.",
     "semantics": "granted means the controller granted access, not proof the door physically opened or a person entered. taken/not_taken are separate controller-reported outcomes; door_open_confirmed remains false without independent position confirmation.",
-    "delivery": "Stable event_id; QoS 1 downstream, possible duplicate delivery. Deduplicate by event_id. Fresh-only first activation; queued events remain retryable across restart. Invalid events emit a redacted diagnostic and do not block later reader events. Source identity changes or log gaps require reconciliation.",
-    "availability": "Requires an enabled, commissioned Axis A1601 event source and configured logical doors. A reader connected to an unmanaged controller is not observed by this integration."
+    "delivery": "Stable event_id; QoS 1 downstream, possible duplicate delivery. Deduplicate by event_id. Fresh-only first activation; queued events remain retryable across restart. Invalid events emit a redacted diagnostic and do not block later reader events. Source identity changes or log gaps require reconciliation. Reader and door-command audit events are prioritized ahead of routine supervision; alarm-priority events remain higher.",
+    "availability": "Requires an enabled, commissioned Axis A1601 event source and configured logical doors. A reader connected to an unmanaged controller is not observed by this integration.",
+    "validation": "access.reader.validation carries payload.test=true and payload.validation_id; it is a synthetic commissioning test and must not be treated as a customer visit."
+  },
+  "mqtt_event_selection": {
+    "settings_path": "/appliance-api/mqtt",
+    "destination_field": "event_types",
+    "type": "array of 1\u201364 exact event type names; omit for all types on selected topics",
+    "combination": "Both topic filters and event_types must match. Local event publishing is unchanged.",
+    "held_status": "MQTT status includes held entries by destination, reason and count, separate from eligible pending copies. Excluded previously queued copies remain durable with policy_hold and are not marked delivered or automatically replayed. Changing destination policy with outstanding copies requires explicit reconciliation."
   }
 }
