@@ -5504,6 +5504,43 @@
         "device_roles"
       ],
       "notes": "Preserves site-scoped invitation restrictions. Developer requires a commissioned system."
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/shelly-settings",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.controllers.manage",
+      "category": "Access Control",
+      "authentication": "Dashboard session cookie; POST additionally requires X-RadiusVision-CSRF",
+      "name": "Shelly driver settings",
+      "fields": [
+        "controller_id"
+      ],
+      "actions": [],
+      "notes": "Scoped to registered commissioned Shelly controllers. Password is write-only; blank/omitted preserves stored credential. Tests verify identity, authentication and relay state without actuation. Saves update EyeQ connection settings, not the device password. Seven-second relay profile. Bearer agents and MQTT are not supported for credential settings."
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/shelly-settings",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.controllers.manage",
+      "category": "Access Control",
+      "authentication": "Dashboard session cookie; POST additionally requires X-RadiusVision-CSRF",
+      "name": "Shelly driver settings",
+      "fields": [
+        "action",
+        "controller_id",
+        "host",
+        "name",
+        "password"
+      ],
+      "actions": [
+        "test",
+        "save"
+      ],
+      "notes": "Scoped to registered commissioned Shelly controllers. Password is write-only; blank/omitted preserves stored credential. Tests verify identity, authentication and relay state without actuation. Saves update EyeQ connection settings, not the device password. Seven-second relay profile. Bearer agents and MQTT are not supported for credential settings."
     }
   ],
   "mqtt_operations": {
