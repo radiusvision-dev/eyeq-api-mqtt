@@ -7038,5 +7038,6 @@
       "Relay acknowledgement does not prove physical door opening.",
       "Offline commands are not deferred for execution on reconnect."
     ]
-  }
+  },
+  "session_compatibility": "Federated dashboard sessions must be bound to their configured identity-provider issuer. After an authentication compatibility update, older unbound sessions require sign-in again. Existing permissions and controller scopes are unchanged."
 }
