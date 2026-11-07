@@ -2865,7 +2865,8 @@
         "windowMinutes": "5\u20131440",
         "eventLimit": "0\u20131000; bounded newest events in the window",
         "compact": "1 for compact event payloads",
-        "recordings": "1 to include available archive coverage"
+        "recordings": "1 to include available archive coverage",
+        "presetId": "Optional saved preset ID; returns its layout without saving or changing the active/default layout. Unknown IDs return ok:false with Unknown Vision preset."
       },
       "response_fields": {
         "events": "Merged Vision, enrolled Zensor, site operational and recorded analytics events; telemetry polling and account audit noise are excluded from site history. Results are bounded by eventLimit.",
@@ -7364,7 +7365,7 @@
       "door-access"
     ],
     "door_access": "Uses existing scoped door inventory, state and command endpoints. Releases require explicit confirmation, current binding_revision, fresh request_id and lifetime, CSRF for dashboard sessions, and pacs.doors.operate. No automatic command retries. Controller state is not physical position.",
-    "available": false,
-    "availability_note": "Staged mobile interface update; deployment and live validation are pending. The read-only presetId preview parameter is not available in the current release."
+    "available": true,
+    "availability_note": "Available on systems with the mobile Vision interface enabled. Saved mobile presets must be configured for the system."
   }
 }
