@@ -5420,6 +5420,90 @@
       "category": "Portal user invitations",
       "authentication": "Portal session and CSRF for POST",
       "name": "Site-scoped invitations"
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/vision-talkback",
+      "mqtt": [],
+      "available": true,
+      "permission": "ave.control",
+      "authentication": "Dashboard session cookie and X-RadiusVision-CSRF",
+      "category": "Vision audio",
+      "name": "Commissioned Axis C3003 browser push-to-talk",
+      "actions": [
+        "audio_ptt_start",
+        "audio_ptt_chunk",
+        "audio_ptt_stop"
+      ],
+      "fields": [
+        "action",
+        "channel",
+        "device_id",
+        "session_id",
+        "sequence",
+        "audio_base64"
+      ],
+      "action_fields": {
+        "audio_ptt_start": [
+          "channel",
+          "device_id"
+        ],
+        "audio_ptt_chunk": [
+          "channel",
+          "device_id",
+          "session_id",
+          "sequence",
+          "audio_base64"
+        ],
+        "audio_ptt_stop": [
+          "channel",
+          "device_id",
+          "session_id"
+        ]
+      },
+      "transport": "https-media",
+      "limits": {
+        "encoding": "G.711 mu-law, 8000 Hz, mono",
+        "max_chunk_bytes": 2000,
+        "max_duration_seconds": 120,
+        "idle_expiry_seconds": 5
+      },
+      "notes": "Browser-session media only; not available through bearer-agent or MQTT commands. Successful device acknowledgement is not acoustic confirmation."
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/invites",
+      "mqtt": [],
+      "available": true,
+      "permission": "portal administrator",
+      "authentication": "Portal session cookie and X-CSRF-Token from GET /api/me",
+      "category": "User access",
+      "name": "Administrator invitation",
+      "fields": [
+        "bundle_name",
+        "notes",
+        "recipient_email",
+        "recipient_name",
+        "access_item_slugs",
+        "device_roles",
+        "expires_days"
+      ],
+      "notes": "device_roles maps authorized system UUIDs or prefixes to administrators, developers, advanced-operators or live-operators. Developer requires a commissioned system. expires_days: 1\u201330, default 7."
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/users/{user_pk}/access",
+      "mqtt": [],
+      "available": true,
+      "permission": "portal administrator",
+      "authentication": "Portal session cookie and X-CSRF-Token from GET /api/me",
+      "category": "User access",
+      "name": "Update user system access",
+      "fields": [
+        "access_item_slugs",
+        "device_roles"
+      ],
+      "notes": "Preserves site-scoped invitation restrictions. Developer requires a commissioned system."
     }
   ],
   "mqtt_operations": {
@@ -7164,5 +7248,27 @@
       "503": "Invitation service unavailable"
     },
     "mqtt": "No MQTT operation; portal session endpoint only."
-  }
+  },
+  "role_profiles": [
+    {
+      "id": "administrators",
+      "name": "Administrator",
+      "description": "Full system administration."
+    },
+    {
+      "id": "developers",
+      "name": "Developer",
+      "description": "Advanced Operator permissions plus API-grant management. A trusted privileged role: issued API grants can carry broad authority. Available only on commissioned systems."
+    },
+    {
+      "id": "advanced-operators",
+      "name": "Advanced Operator",
+      "description": "Live operations, configuration and AI tools; excludes direct user, network, API-key, power and destructive storage administration."
+    },
+    {
+      "id": "live-operators",
+      "name": "Live Operator",
+      "description": "Live viewing, playback, exports, PTZ, audio and permitted live controls, plus read-only health. No configuration or API-key administration."
+    }
+  ]
 }
