@@ -5903,7 +5903,8 @@
       "method": "GET",
       "path": "/appliance-api/eyeq-vision",
       "permission": "vision.view",
-      "transport": "json"
+      "transport": "json",
+      "query_parameters": {}
     },
     "get-eyeq-vision-radar": {
       "available": true,
@@ -7355,5 +7356,15 @@
     "authentication": "Applications and AI agents use the same scoped, expiring bearer tokens.",
     "access_control": "Select a token, site, controllers and explicit Access Control permissions. PIN administration requires an explicit delegation; ordinary tokens do not gain it automatically.",
     "differences": "Interactive dashboard sessions use session authentication and CSRF. MQTT uses separate broker credentials and operation grants. Available operations still depend on token scopes, resource permissions and enabled services."
+  },
+  "mobile_vision": {
+    "selection": "Saved mobile layouts are selected without changing desktop defaults.",
+    "widgets": [
+      "site-health",
+      "door-access"
+    ],
+    "door_access": "Uses existing scoped door inventory, state and command endpoints. Releases require explicit confirmation, current binding_revision, fresh request_id and lifetime, CSRF for dashboard sessions, and pacs.doors.operate. No automatic command retries. Controller state is not physical position.",
+    "available": false,
+    "availability_note": "Staged mobile interface update; deployment and live validation are pending. The read-only presetId preview parameter is not available in the current release."
   }
 }
