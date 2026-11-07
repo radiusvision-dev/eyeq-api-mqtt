@@ -2866,7 +2866,8 @@
         "eventLimit": "0\u20131000; bounded newest events in the window",
         "compact": "1 for compact event payloads",
         "recordings": "1 to include available archive coverage",
-        "presetId": "Optional saved preset ID; returns its layout without saving or changing the active/default layout. Unknown IDs return ok:false with Unknown Vision preset."
+        "presetId": "Optional saved preset ID; returns its layout without saving or changing the active/default layout. Unknown IDs return ok:false with Unknown Vision preset.",
+        "view": "presets returns only ok and the saved preset catalog in presets, without camera, event or telemetry state. Existing Vision authentication and permissions apply."
       },
       "response_fields": {
         "events": "Merged Vision, enrolled Zensor, site operational and recorded analytics events; telemetry polling and account audit noise are excluded from site history. Results are bounded by eventLimit.",
@@ -7366,6 +7367,7 @@
     ],
     "door_access": "Uses existing scoped door inventory, state and command endpoints. Releases require explicit confirmation, current binding_revision, fresh request_id and lifetime, CSRF for dashboard sessions, and pacs.doors.operate. No automatic command retries. Controller state is not physical position.",
     "available": true,
-    "availability_note": "Available on systems with the mobile Vision interface enabled. Saved mobile presets must be configured for the system."
+    "availability_note": "Available on systems with the mobile Vision interface enabled. Saved mobile presets must be configured for the system.",
+    "camera_grid": "All Cameras offers a camera selector and Show All Cameras: a two-column scrolling native Vision grid using low-resolution streams, muted audio and visible-tile loading. Selecting one camera exits the grid. Desktop presets are unchanged."
   }
 }
