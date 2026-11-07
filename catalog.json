@@ -1285,7 +1285,7 @@
         "duration_seconds",
         "person_id"
       ],
-      "unlock_duration": "Use 1\u201330 seconds with an override-capable door, or exactly 60 when the door inventory advertises configured_access_seconds: 60. Mismatches are rejected before dispatch.",
+      "unlock_duration": "Exact advertised configured_access_seconds (1\u201330 or 60), or a 1\u201330 second override when supported. Shelly Gen3 maglock profile requires exactly 7 seconds.",
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
@@ -1355,7 +1355,17 @@
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "history"
+      "name": "history",
+      "description": "Read-only access history requires pacs.events.view and current site/controller grants, not general API administration. Optional person_id also requires pacs.people.view and one selected controller. Events include door_id when recorded; physical door movement is not inferred.",
+      "response_fields": [
+        "ok",
+        "events",
+        "view",
+        "more",
+        "next_cursor",
+        "complete_history",
+        "retention"
+      ]
     },
     {
       "method": "POST",
@@ -6945,5 +6955,55 @@
     "audio_preference": "An explicitly disabled channel audio preference remains disabled during source regeneration. Enable audio explicitly when required.",
     "audio_only_channels": "A network-audio channel may display a status card rather than a camera image. An available audio source is distinct from verified speaker playback or talkback. Speaker control requires saved credentials for that same device.",
     "channel_routing": "Commands addressed by channel use that channel's selected model-specific adapter. An unsupported channel does not fall back to another PTZ."
+  },
+  "door_providers": {
+    "api_version": "2026-11-06",
+    "providers": [
+      "axis_pacs",
+      "shelly_gen3"
+    ],
+    "inventory_fields": [
+      "provider",
+      "control_unit_id",
+      "relay_channel",
+      "availability",
+      "configured_access_seconds",
+      "can_unlock",
+      "can_lock",
+      "operation_permitted",
+      "binding_revision"
+    ],
+    "availability": [
+      "verified",
+      "identity_pending",
+      "unavailable_or_changed"
+    ],
+    "shelly_gen3": {
+      "model": "Shelly 1 Gen3",
+      "release_seconds": 7,
+      "relay_channel": 0,
+      "locked_output": true,
+      "unlock_output": false,
+      "device_side_timer": true,
+      "identity_required": true,
+      "state_fields": [
+        "relay_output",
+        "relay_channel",
+        "timer_duration_seconds",
+        "feedback_source"
+      ],
+      "feedback_source": "shelly_switch_status",
+      "physical_contact_state": "Unknown",
+      "staged_operations_available": false
+    },
+    "audit_optional_payload_fields": [
+      "access_site_id"
+    ],
+    "notes": [
+      "Controller and door grants remain mandatory for HTTPS and MQTT.",
+      "Staged inventory does not establish device availability.",
+      "Relay acknowledgement does not prove physical door opening.",
+      "Offline commands are not deferred for execution on reconnect."
+    ]
   }
 }
