@@ -1350,13 +1350,17 @@
         "person_id",
         "before",
         "limit",
-        "view"
+        "view",
+        "include_people",
+        "q",
+        "door_id",
+        "event_type"
       ],
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
       "name": "history",
-      "description": "Read-only access history requires pacs.events.view and current site/controller grants, not general API administration. Optional person_id also requires pacs.people.view and one selected controller. Events include door_id when recorded; physical door movement is not inferred.",
+      "description": "Read-only saved access history, scoped by current site/controller grants. Cursor before is an opaque returned database ID; limit is 1\u2013100. view=all includes diagnostics, access selects reader access, activity includes reader access and door commands/alarms. q searches authorized name/phone plus recorded door ID, event type and result; door_id and event_type are exact filters. include_people=1 requests person_name and person_phone only where pacs.people.view is also granted. Default responses omit personal fields. Details are current customer records, not historical snapshots. Missing associations remain null. Remote unlock does not prove physical entry.",
       "response_fields": [
         "ok",
         "events",
@@ -1364,8 +1368,32 @@
         "more",
         "next_cursor",
         "complete_history",
-        "retention"
-      ]
+        "retention",
+        "controllers",
+        "doors"
+      ],
+      "event_fields": [
+        "id",
+        "controller_id",
+        "controller_name",
+        "site_id",
+        "person_id",
+        "credential_id",
+        "type",
+        "at",
+        "observed_at",
+        "origin",
+        "result",
+        "actor_id",
+        "attribution",
+        "door_id",
+        "door_name",
+        "reader_id",
+        "person_name (opt-in)",
+        "person_phone (opt-in)",
+        "person_details_status (opt-in)"
+      ],
+      "availability_note": "History browsing extensions require the Vision history update; older editions do not accept the new query fields."
     },
     {
       "method": "POST",
@@ -2820,7 +2848,11 @@
       "available": true,
       "permission": "vision.view",
       "actions": [],
-      "fields": [],
+      "fields": [
+        "history",
+        "before",
+        "limit"
+      ],
       "scope": "ai6:eyeq-vision",
       "category": "EyeQ vision and radar",
       "authentication": "Bearer token",
@@ -2915,7 +2947,8 @@
           "delivery": "Non-retained. Large snapshots are chunked base64-json: reassemble by sha256 and index, verify the digest, then parse the JSON. Missing publication is not zero usage. Subscribe before requesting data."
         }
       },
-      "weatherflow": "Current WeatherFlow Tempest configuration and enabled/configured state, model and local-udp transport. Source IP, serials, MAC and receiving interface are visible with vision.view. siteTelemetry.health.tempest_local supplies observation health and last packet/source timestamps. Use weather timestamps and freshness to evaluate historical observations."
+      "weatherflow": "Current WeatherFlow Tempest configuration and enabled/configured state, model and local-udp transport. Source IP, serials, MAC and receiving interface are visible with vision.view. siteTelemetry.health.tempest_local supplies observation health and last packet/source timestamps. Use weather timestamps and freshness to evaluate historical observations.",
+      "persistent_history": "With the Vision history update, history=1 returns saved site events independently of the playback window: events, more, next_cursor, status, malformedSkipped, order, complete_history. limit 1\u2013100; before uses the returned cursor. Records are in recorded-descending order. Uncollected/deleted events cannot be reconstructed. This cursor does not enumerate all Spectrum recorded analytics; those remain part of timeline queries."
     },
     {
       "method": "POST",
