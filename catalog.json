@@ -1285,6 +1285,7 @@
         "duration_seconds",
         "person_id"
       ],
+      "unlock_duration": "Use 1\u201330 seconds with an override-capable door, or exactly 60 when the door inventory advertises configured_access_seconds: 60. Mismatches are rejected before dispatch.",
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",

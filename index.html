@@ -103,7 +103,7 @@ mosquitto_pub -h &quot;&lt;mqtt-host&gt;&quot; -p 8883 \
  "doors":[{"door_id":"door_0123456789abcdef0123456789abcdef",
  "controller_id":"controller-example","provider":"axis_pacs",
  "binding_revision":"&lt;64 hexadecimal characters&gt;","can_unlock":true,
- "can_lock":true,"operation_permitted":true,"control_unit_id":null,"relay_channel":null}]}</code></pre><p>To unlock, POST the following JSON to <code>/appliance-api/physical-access/doors/{door_id}/commands</code>, substituting current Unix-second times and the returned revision:</p><pre><code>{"controller_id":"controller-example","request_id":"1234567890abcdef1234567890abcdef",
+ "can_lock":true,"operation_permitted":true,"control_unit_id":null,"relay_channel":null}]}</code></pre><p>When <code>configured_access_seconds</code> is 60, send <code>"duration_seconds":60</code> to use the controller’s own timer. A shorter request is rejected before dispatch. When that field is null and <code>can_unlock</code> is true, request a 1–30 second override. These rules apply to HTTPS and MQTT. To unlock, POST the following JSON to <code>/appliance-api/physical-access/doors/{door_id}/commands</code>, substituting current Unix-second times and the returned revision:</p><pre><code>{"controller_id":"controller-example","request_id":"1234567890abcdef1234567890abcdef",
  "action":"unlock","duration_seconds":5,"binding_revision":"&lt;returned revision&gt;",
  "issued_at":NOW,"expires_at":NOW_PLUS_30,"confirm":true}
 # Successful acknowledgement shape; sensors and identifiers vary:
