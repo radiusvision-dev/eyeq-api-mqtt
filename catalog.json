@@ -7391,6 +7391,7 @@
     },
     "browser_support": "Android Chrome: use Install app or Add to Home screen. iPhone/iPad Safari: Share, then Add to Home Screen. Availability and wording depend on browser and device policy.",
     "link_previews": "Shared site links use generic RadiusVision EyeQ artwork, never live camera images. Messaging apps may cache previews or disable them.",
-    "api_authentication": "A public sign-in page returning HTTP 200 is not an authenticated API session. API authorization requirements are unchanged."
+    "api_authentication": "A public sign-in page returning HTTP 200 is not an authenticated API session. API authorization requirements are unchanged.",
+    "portal_sign_in": "Site users may sign in at app.radiusvision.com with their assigned RadiusVision account. The portal lists only their assigned EyeQ Spectrum Systems. A site Administrator or Developer role does not grant global portal administration or infrastructure-console access."
   }
 }
