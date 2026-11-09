@@ -7369,7 +7369,7 @@
       "controller_writes": false
     },
     "history_customer_details": {
-      "endpoint": "GET /appliance-api/physical-access/history",
+      "endpoint": "GET /appliance-api/physical-access/history?include_people=1",
       "permissions": [
         "pacs.events.view",
         "pacs.people.view"
@@ -7381,7 +7381,8 @@
         "person_details_basis"
       ],
       "privacy": "Customer fields are included only for the permitted controller and person-information scope. PIN values are never included.",
-      "basis": "Current matched customer record and current imported rental unit labels, not a historical tenancy snapshot. Missing or unmatched details are not invented."
+      "basis": "Current matched customer record and current imported rental unit labels, not a historical tenancy snapshot. Missing or unmatched details are not invented.",
+      "browser_behavior": "Browser-session history requests include permitted customer details by default. Bearer/agent and MQTT clients request include_people=1 explicitly. include_people=0 suppresses details. Role and controller scope still apply."
     }
   },
   "api_access_settings": {
