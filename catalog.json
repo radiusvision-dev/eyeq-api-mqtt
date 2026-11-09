@@ -7383,6 +7383,38 @@
       "privacy": "Customer fields are included only for the permitted controller and person-information scope. PIN values are never included.",
       "basis": "Current matched customer record and current imported rental unit labels, not a historical tenancy snapshot. Missing or unmatched details are not invented.",
       "browser_behavior": "Browser-session history requests include permitted customer details by default. Bearer/agent and MQTT clients request include_people=1 explicitly. include_people=0 suppresses details. Role and controller scope still apply."
+    },
+    "rental_profile_fields": {
+      "field": "unit_numbers",
+      "availability": "Optional current imported rental-unit labels on permitted customer profiles and history. Empty or absent when unknown.",
+      "permission": "pacs.people.view",
+      "basis": "Current site/owner/rental relationship; does not grant door access."
+    },
+    "reader_collection_health": {
+      "locations": [
+        "controllers[].collector",
+        "history.collectors[]"
+      ],
+      "source": "reader_events",
+      "fields": [
+        "enabled",
+        "status",
+        "last_attempt",
+        "last_success",
+        "age_seconds",
+        "last_error",
+        "interval_seconds"
+      ],
+      "states": [
+        "disabled",
+        "starting",
+        "healthy",
+        "retrying",
+        "stale",
+        "binding_changed",
+        "unavailable"
+      ],
+      "semantics": "Health comes from the identity-bound reader event collector. A running process, browser credential lease or zero events alone does not prove successful collection. Reader online state and physical lock state are separate."
     }
   },
   "api_access_settings": {
