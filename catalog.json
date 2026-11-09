@@ -7351,7 +7351,38 @@
     "mutation_csrf": "X-RadiusVision-CSRF must match the browser session CSRF token.",
     "scope": "Role permission plus an unexpired site/controller grant. Administrator role alone does not grant every site.",
     "pin": "PIN reveal and PIN change require Administrator role and pacs.credentials.manage plus controller scope. Revealed values must be hidden after the returned hide_after_seconds.",
-    "connection": "Controller management may require an explicit secure connection; the credential lease lasts ten minutes. A restart or expiry requires reconnecting. Local controller PIN validation is independent of that management session."
+    "connection": "Commissioned controllers can use protected, identity-bound management credentials. Current role permission and unexpired site/controller grants are checked on every operation. Uncommissioned systems require a temporary secure connection lasting ten minutes. Controller PIN validation is independent of browser connections.",
+    "reader_readiness": {
+      "endpoint": "GET /appliance-api/physical-access/configuration/reader-readiness",
+      "permission": "pacs.view",
+      "request": {
+        "controller_id": "controller_example",
+        "resource_id": "eyeq-00000000000000000000000000000001"
+      },
+      "response_fields": {
+        "configuration_verified": "Current reader configuration matches the approved saved configuration",
+        "physical_io_assigned": "A matching reader port is assigned",
+        "ready_for_access": "Reader is recorded as commissioned and has a matching port assignment; this is not proof of current reader connectivity",
+        "reader_online": "null when not established by this check",
+        "secure_channel": "Observed encryption channel status; OSDP alone is not proof of encryption"
+      },
+      "controller_writes": false
+    },
+    "history_customer_details": {
+      "endpoint": "GET /appliance-api/physical-access/history",
+      "permissions": [
+        "pacs.events.view",
+        "pacs.people.view"
+      ],
+      "fields": [
+        "person_name",
+        "person_phone",
+        "unit_numbers",
+        "person_details_basis"
+      ],
+      "privacy": "Customer fields are included only for the permitted controller and person-information scope. PIN values are never included.",
+      "basis": "Current matched customer record and current imported rental unit labels, not a historical tenancy snapshot. Missing or unmatched details are not invented."
+    }
   },
   "api_access_settings": {
     "location": "Settings \u2192 API & AI Agent Access",
