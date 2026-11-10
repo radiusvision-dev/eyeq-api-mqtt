@@ -1,7 +1,7 @@
 {
   "title": "EyeQ API and MQTT",
   "system": "EyeQ Spectrum Systems",
-  "edition": "2026-11-07",
+  "edition": "2026-11-10",
   "https": [
     {
       "method": "GET",
@@ -1121,12 +1121,62 @@
       "permission": "pacs.credentials.manage",
       "actions": [],
       "fields": [
-        "controller_id"
+        "controller_id",
+        "limit",
+        "after",
+        "person_id",
+        "status"
       ],
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "credentials"
+      "name": "credentials",
+      "required_fields": [
+        "controller_id"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 500
+          },
+          "after": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "controller_id"
+        ]
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "credentials": "managed local metadata rows with optional person_name/unit_numbers, assignment_id/shared_status/intended_doors",
+        "total": "filtered row count",
+        "has_more": "boolean",
+        "next_cursor": "string or null",
+        "inventory": "eyeq_managed_local",
+        "controller_inventory_complete": "always false"
+      }
     },
     {
       "method": "POST",
@@ -1150,7 +1200,54 @@
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "enroll"
+      "name": "enroll",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "kind",
+        "value"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PIN",
+              "Card"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "writeOnly": true,
+            "description": "Decimal credential value; configured reader limits apply."
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "person_id",
+          "kind",
+          "value"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1174,7 +1271,55 @@
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "change"
+      "name": "change",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "credential_id",
+        "value"
+      ],
+      "additional_permissions": [
+        "pacs.people.view",
+        "explicit PIN-administration delegation"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "credential_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "value": {
+            "type": "string",
+            "writeOnly": true,
+            "pattern": "^[0-9]{4,12}$"
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "person_id",
+          "credential_id",
+          "value"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1219,7 +1364,38 @@
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "revoke"
+      "name": "revoke",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "credential_id"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "credential_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "credential_id"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1426,12 +1602,64 @@
       "permission": "pacs.people.view",
       "actions": [],
       "fields": [
-        "controller_id"
+        "controller_id",
+        "limit",
+        "after",
+        "q",
+        "status",
+        "source_user_id"
       ],
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "people"
+      "name": "people",
+      "required_fields": [
+        "controller_id"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 500
+          },
+          "after": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "q": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "source_user_id": {
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "controller_id"
+        ]
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "people": "array of customer profiles",
+        "total": "filtered row count",
+        "has_more": "boolean",
+        "next_cursor": "string or null"
+      }
     },
     {
       "method": "POST",
@@ -1449,15 +1677,67 @@
         "controller_id",
         "request_id",
         "name",
-        "address",
-        "phone",
         "email",
+        "phone",
+        "address",
         "custom_fields"
       ],
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "people"
+      "name": "people",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "name"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "email": {
+            "type": "string",
+            "maxLength": 254
+          },
+          "phone": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "address": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "custom_fields": {
+            "type": "object",
+            "maxProperties": 20,
+            "additionalProperties": {
+              "type": "string",
+              "maxLength": 256
+            },
+            "description": "Non-sensitive labels only. PIN, card, plate, password and biometric fields are rejected."
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "name"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1479,7 +1759,38 @@
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "provision"
+      "name": "provision",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "person_id"
+      ],
+      "additional_permissions": [],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "person_id"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "GET",
@@ -1537,7 +1848,27 @@
       "scope": "ai6:read",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "shared"
+      "name": "shared",
+      "required_fields": [
+        "controller_id"
+      ],
+      "additional_permissions": [
+        "pacs.view",
+        "pacs.credentials.manage"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id"
+        ]
+      }
     },
     {
       "method": "POST",
@@ -1553,14 +1884,58 @@
       "actions": [],
       "fields": [
         "controller_id",
+        "request_id",
         "assignment_id",
-        "confirm",
-        "request_id"
+        "confirm"
       ],
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "activate"
+      "name": "activate",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "assignment_id",
+        "confirm"
+      ],
+      "additional_permissions": [
+        "pacs.view",
+        "pacs.people.view",
+        "pacs.people.manage",
+        "pacs.credentials.manage"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "assignment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "confirm": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "assignment_id",
+          "confirm"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1599,14 +1974,57 @@
       "actions": [],
       "fields": [
         "controller_id",
+        "request_id",
         "assignment_id",
-        "confirm",
-        "request_id"
+        "confirm"
       ],
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "revoke"
+      "name": "revoke",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "assignment_id",
+        "confirm"
+      ],
+      "additional_permissions": [
+        "pacs.view",
+        "pacs.people.view",
+        "pacs.people.manage"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "assignment_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "confirm": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "assignment_id",
+          "confirm"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "POST",
@@ -1622,17 +2040,80 @@
       "actions": [],
       "fields": [
         "controller_id",
+        "request_id",
         "person_id",
         "group_id",
         "kind",
         "value",
-        "source_credential_id",
-        "request_id"
+        "source_credential_id"
       ],
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "stage"
+      "name": "stage",
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "group_id",
+        "kind",
+        "value",
+        "source_credential_id"
+      ],
+      "additional_permissions": [
+        "pacs.view",
+        "pacs.people.view",
+        "pacs.people.manage"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "group_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "PIN",
+              "Card"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "source_credential_id": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "person_id",
+          "group_id",
+          "kind",
+          "value",
+          "source_credential_id"
+        ],
+        "additionalProperties": false
+      }
     },
     {
       "method": "GET",
@@ -5543,6 +6024,342 @@
         "save"
       ],
       "notes": "Scoped to registered commissioned Shelly controllers. Password is write-only; blank/omitted preserves stored credential. Tests verify identity, authentication and relay state without actuation. Saves update EyeQ connection settings, not the device password. Seven-second relay profile. Bearer agents and MQTT are not supported for credential settings."
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people/upsert",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.people.manage",
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "Create or update a customer by configured Storeganise identity",
+      "fields": [
+        "controller_id",
+        "request_id",
+        "expected_revision",
+        "profile",
+        "person_id",
+        "source_user_id",
+        "previous_person_id",
+        "previous_revision"
+      ],
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "source_user_id",
+        "expected_revision",
+        "profile"
+      ],
+      "additional_permissions": [
+        "pacs.people.view"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "expected_revision": {
+            "type": "string",
+            "pattern": "^(|[a-f0-9]{64})$"
+          },
+          "profile": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "email": {
+                "type": "string",
+                "maxLength": 254
+              },
+              "phone": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "address": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "unit_numbers": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "custom_fields": {
+                "type": "object",
+                "maxProperties": 20,
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                "description": "Non-sensitive labels only. PIN, card, plate, password and biometric fields are rejected."
+              }
+            }
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "source_user_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "previous_person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "previous_revision": {
+            "type": "string",
+            "pattern": "^(|[a-f0-9]{64})$"
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "source_user_id",
+          "expected_revision",
+          "profile"
+        ],
+        "additionalProperties": false
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "status": "verified after local metadata commit",
+        "person": "profile with id, status, revision, source_identity, profile_writer",
+        "created": "boolean",
+        "controller_writes": "always 0",
+        "access_changed": "always false"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/appliance-api/physical-access/people/update",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.people.manage",
+      "actions": [],
+      "scope": "ai6:control",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "Update customer metadata without changing access",
+      "fields": [
+        "controller_id",
+        "request_id",
+        "expected_revision",
+        "profile",
+        "person_id"
+      ],
+      "required_fields": [
+        "controller_id",
+        "request_id",
+        "person_id",
+        "expected_revision",
+        "profile"
+      ],
+      "additional_permissions": [
+        "pacs.people.view"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{32}$"
+          },
+          "expected_revision": {
+            "type": "string",
+            "pattern": "^(|[a-f0-9]{64})$"
+          },
+          "profile": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 160
+              },
+              "email": {
+                "type": "string",
+                "maxLength": 254
+              },
+              "phone": {
+                "type": "string",
+                "maxLength": 64
+              },
+              "address": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "unit_numbers": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "custom_fields": {
+                "type": "object",
+                "maxProperties": 20,
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                "description": "Non-sensitive labels only. PIN, card, plate, password and biometric fields are rejected."
+              }
+            }
+          },
+          "person_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id",
+          "request_id",
+          "person_id",
+          "expected_revision",
+          "profile"
+        ],
+        "additionalProperties": false
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "status": "verified after local metadata commit",
+        "person": "profile with id, status, revision, source_identity, profile_writer",
+        "created": "boolean",
+        "controller_writes": "always 0",
+        "access_changed": "always false"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/credentials/status",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "Read identity-verified controller credential status without its value",
+      "fields": [
+        "controller_id",
+        "credential_id"
+      ],
+      "required_fields": [
+        "controller_id",
+        "credential_id"
+      ],
+      "additional_permissions": [
+        "pacs.people.view"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "credential_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id",
+          "credential_id"
+        ]
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "credential_id": "managed credential ID",
+        "person_id": "managed person ID",
+        "local_status": "local metadata status",
+        "present": "boolean",
+        "enabled": "boolean",
+        "group_ids": "current controller policy IDs",
+        "verified_at": "Unix seconds",
+        "physical_access_verified": "always false"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/credentials/inventory",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.credentials.manage",
+      "actions": [],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token",
+      "name": "Read complete redacted controller credential inventory",
+      "fields": [
+        "controller_id"
+      ],
+      "required_fields": [
+        "controller_id"
+      ],
+      "additional_permissions": [
+        "pacs.people.view"
+      ],
+      "request_schema": {
+        "type": "object",
+        "properties": {
+          "controller_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        },
+        "required": [
+          "controller_id"
+        ]
+      },
+      "response_fields": {
+        "ok": "boolean",
+        "controller_inventory_complete": "true after complete validated scan",
+        "total": "integer",
+        "enabled": "integer",
+        "managed": "integer",
+        "unmanaged": "integer",
+        "local_missing": "managed IDs absent from the controller",
+        "credentials": "redacted controller inventory rows",
+        "pin_values_included": "always false",
+        "verified_at": "Unix seconds"
+      }
     }
   ],
   "mqtt_operations": {
@@ -7457,5 +8274,41 @@
     "link_previews": "Shared site links use generic RadiusVision EyeQ artwork, never live camera images. Messaging apps may cache previews or disable them.",
     "api_authentication": "A public sign-in page returning HTTP 200 is not an authenticated API session. API authorization requirements are unchanged.",
     "portal_sign_in": "Site users may sign in at app.radiusvision.com with their assigned RadiusVision account. The portal lists only their assigned EyeQ Spectrum Systems. A site Administrator or Developer role does not grant global portal administration or infrastructure-console access."
+  },
+  "customer_pin_sync": {
+    "source": "Configured Storeganise tenant and site; immutable source_user_id mapping per controller",
+    "metadata_operations": [
+      "POST /appliance-api/physical-access/people/upsert",
+      "POST /appliance-api/physical-access/people/update"
+    ],
+    "profile_fields": [
+      "name",
+      "email",
+      "phone",
+      "address",
+      "unit_numbers",
+      "custom_fields"
+    ],
+    "ownership": "An external API update owns that profile\u2019s contact/unit fields; the read-only Storeganise import does not overwrite them.",
+    "revisions": "Read person.revision before editing; use expected_revision=\"\" only when creating a new unmapped profile. Stale revision or conflicting request_id returns 409.",
+    "linking": "To replace a source-only import mapping, supply person_id for the reviewed target, its expected_revision, previous_person_id and previous_revision. The previous profile must be source-only without credentials; no credential transfers or fuzzy matching occur.",
+    "provisioning": [
+      "Upsert metadata",
+      "Provision source-only person",
+      "Stage credential in an existing approved shared group",
+      "Activate explicitly with pacs.access.grant",
+      "Read controller credential status and reconcile"
+    ],
+    "shared_permissions": [
+      "pacs.view",
+      "pacs.people.view",
+      "pacs.people.manage",
+      "pacs.credentials.manage"
+    ],
+    "policy_edit_permission": "pacs.policy.manage remains required to create/edit groups or schedules, but is not required to stage/activate credentials in existing approved shared groups.",
+    "pin_admin": "Explicit PIN administration delegation plus people-view and credential-management permissions; activation is separate.",
+    "limits": "PIN length must match every configured reader. No automatic revoke, source polling, webhook provisioning, license-plate or biometric linking is added by metadata upserts.",
+    "read_privacy": "PINs are absent from people, credential-status and inventory responses. Unmanaged controller credentials use opaque references.",
+    "transport": "The four new upsert/update/status/inventory routes are HTTPS-only in this edition; existing MQTT operations retain their documented behavior."
   }
 }
