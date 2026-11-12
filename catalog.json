@@ -8314,6 +8314,59 @@
     "pin_admin": "Explicit PIN administration delegation plus people-view and credential-management permissions; activation is separate.",
     "limits": "PIN length must match every configured reader. No automatic revoke, source polling, webhook provisioning, license-plate or biometric linking is added by metadata upserts.",
     "read_privacy": "PINs are absent from people, credential-status and inventory responses. Unmanaged controller credentials use opaque references.",
-    "transport": "The four new upsert/update/status/inventory routes are HTTPS-only in this edition; existing MQTT operations retain their documented behavior."
+    "transport": "The four new upsert/update/status/inventory routes are HTTPS-only in this edition; existing MQTT operations retain their documented behavior.",
+    "single_writer": "Choose one automatic PIN/access-group writer. The EyeQ Storeganise importer only updates customer metadata and never creates, changes, activates or revokes PINs or door access.",
+    "preflight_errors": {
+      "409 credential_conflict": "PIN already exists on a target controller; reconcile the existing owner. No automatic adoption or reassignment.",
+      "422 pin_length_not_supported": "PIN length does not match every selected reader; rejected before credential staging.",
+      "409 authentication_profile_unavailable": "Required standard PIN authentication needs administrator reconciliation.",
+      "409 authentication_policy_conflict": "Credential authentication cannot bypass a different door policy."
+    }
+  },
+  "storeganise_customer_import": {
+    "get": "/appliance-api/physical-access/connectors/storeganise",
+    "configure": "/appliance-api/physical-access/connectors/storeganise/configuration",
+    "permissions": {
+      "read": "pacs.connectors.view",
+      "configure": "pacs.connectors.manage",
+      "refresh": [
+        "pacs.connectors.sync",
+        "pacs.people.manage",
+        "pacs.people.view"
+      ]
+    },
+    "request": {
+      "controller_id": "controller-id",
+      "request_id": "0123456789abcdef0123456789abcdef",
+      "revision": 5,
+      "spec": {
+        "tenant": "example.storeganise.com",
+        "source_site_id": "source-site-id",
+        "mode": "shadow",
+        "automatic_import": true,
+        "import_interval_seconds": 3600
+      }
+    },
+    "schedule": "automatic_import is optional boolean (default true for commissioned jobs); import_interval_seconds is optional integer 900\u201386400 (default commissioned interval). Protected source credentials and an authorized source binding are required. Disabled mode stops imports. Existing PINs remain unchanged.",
+    "status_fields": [
+      "configuration",
+      "revision",
+      "binding_matches",
+      "background.status",
+      "background.last_attempt",
+      "background.last_success",
+      "background.last_error",
+      "background.next_attempt",
+      "background.interval_seconds",
+      "background.persistent_credentials",
+      "customer_snapshot",
+      "automatic_pin_writes",
+      "automatic_access_writes"
+    ],
+    "privacy": "PIN values are not imported into customer profiles. Source access flags are informational, not an access grant. API-managed profiles retain their external writer ownership.",
+    "informational_profile_fields": {
+      "custom_fields.ps_show_gate_open": "Yes or No when supplied by Storeganise; not a permission grant",
+      "custom_fields.bathroom_gate_access": "Yes or No when supplied by Storeganise; not a permission grant"
+    }
   }
 }
