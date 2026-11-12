@@ -1,7 +1,7 @@
 {
   "title": "EyeQ API and MQTT",
   "system": "EyeQ Spectrum Systems",
-  "edition": "2026-11-10",
+  "edition": "2026-11-11",
   "https": [
     {
       "method": "GET",
@@ -8069,7 +8069,12 @@
     "destination_field": "event_types",
     "type": "array of 1\u201364 exact event type names; omit for all types on selected topics",
     "combination": "Both topic filters and event_types must match. Local event publishing is unchanged.",
-    "held_status": "MQTT status includes held entries by destination, reason and count, separate from eligible pending copies. Excluded previously queued copies remain durable with policy_hold and are not marked delivered or automatically replayed. Changing destination policy with outstanding copies requires explicit reconciliation."
+    "held_status": "MQTT status includes held entries by destination, reason and count, separate from eligible pending copies. Excluded previously queued copies remain durable with policy_hold and are not marked delivered or automatically replayed. Changing destination policy with outstanding copies requires explicit reconciliation.",
+    "permanent_operator_discards": {
+      "behavior": "Explicitly and permanently discarded event identities are excluded from all upstream destinations, including after queue restoration, event re-import, destination renaming or selection changes. They are not marked delivered. Local event history and local publication are preserved.",
+      "override": "Replay approval or broader forwarding selections do not override a permanent operator discard.",
+      "availability": "Operator-managed reconciliation; no customer API command for creating, removing or overriding permanent discards."
+    }
   },
   "portal_site_invitations": {
     "origin": "https://app.radiusvision.com",
