@@ -8365,8 +8365,10 @@
     ],
     "privacy": "PIN values are not imported into customer profiles. Source access flags are informational, not an access grant. API-managed profiles retain their external writer ownership.",
     "informational_profile_fields": {
-      "custom_fields.ps_show_gate_open": "Yes or No when supplied by Storeganise; not a permission grant",
-      "custom_fields.bathroom_gate_access": "Yes or No when supplied by Storeganise; not a permission grant"
+      "custom_fields.ps_show_gate_open": "Yes after removing whitespace and comparing case-insensitively; otherwise No. Informational only; never an access grant or revocation.",
+      "custom_fields.bathroom_gate_access": "Yes after removing whitespace and comparing case-insensitively; otherwise No. Missing or changed values replace previous imported labels; existing access is unaffected.",
+      "custom_fields.storeganise_customer_status": "Source classification: current_customer, historical_customer, staff, test, inactive or active_account (occupancy unknown). Not controller enablement or permission.",
+      "unit_numbers": "For imported profiles, currently occupied site units only. Historical customers remain visible; no PIN or membership changes."
     }
   }
 }
