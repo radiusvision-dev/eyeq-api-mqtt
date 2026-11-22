@@ -6360,6 +6360,45 @@
         "pin_values_included": "always false",
         "verified_at": "Unix seconds"
       }
+    },
+    {
+      "method": "GET",
+      "path": "/appliance-api/physical-access/reader-health",
+      "mqtt": [],
+      "available": true,
+      "permission": "pacs.view",
+      "actions": [],
+      "fields": [
+        "controller_id"
+      ],
+      "scope": "ai6:read",
+      "category": "Access Control",
+      "authentication": "Bearer token or authenticated dashboard session",
+      "name": "Physical reader health",
+      "description": "Read current supervised OSDP reader communication status. Requires current controller/site grants and, for API tokens, an active scoped delegation. status is online, offline or unknown. Unknown means observations are missing, failed, stale or insufficient; it must not be treated as recovery. A reader online state proves communication, not successful PIN entry or gate movement. Secure-channel status is separate and is not used as device status. No PIN values or customer details are returned. Available in reader-supervision editions. No MQTT operation is introduced.",
+      "response_fields": [
+        "ok",
+        "schema_version",
+        "controller_id",
+        "status",
+        "fault_code",
+        "checked_at",
+        "last_success_at",
+        "age_seconds",
+        "poll_interval_seconds",
+        "stale_after_seconds",
+        "physical_access_tested",
+        "readers"
+      ],
+      "reader_fields": [
+        "reader_id",
+        "reader_name",
+        "status",
+        "last_known_status",
+        "last_transition_at",
+        "source_row (when observed)",
+        "fault_code"
+      ]
     }
   ],
   "mqtt_operations": {
