@@ -285,7 +285,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "harvest",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -298,7 +301,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "health",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "DELETE",
@@ -313,7 +319,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "{image_id}",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "DELETE",
@@ -328,7 +337,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "annotations",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -348,6 +360,9 @@
         "revision": "Integer concurrency token; 0 means no draft exists.",
         "state": "unannotated | draft | in_review | approved | rejected",
         "boxes": "Current saved boxes."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -386,6 +401,9 @@
       "errors": {
         "409": "Stale/missing revision; reload and explicitly reconcile edits.",
         "400": "Invalid annotation."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -401,7 +419,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "file",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -418,7 +439,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "infer",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -433,7 +457,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "thumbnail",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -451,7 +478,10 @@
       "authentication": "Bearer token",
       "name": "training sets",
       "permission": "ai.train",
-      "description": "Use the annotation editor/save endpoint with expected_revision to change membership as a new draft."
+      "description": "Use the annotation editor/save endpoint with expected_revision to change membership as a new draft.",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -466,7 +496,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "{job_type}",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -479,7 +512,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "models",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "DELETE",
@@ -494,7 +530,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "{model_id}",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -509,7 +548,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "metadata",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -525,7 +567,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "rename",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -538,7 +583,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "settings",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -551,7 +599,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "settings",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -569,6 +620,9 @@
         "workflow": "{states,datasets,audit_identity}",
         "remote": "{enabled,destination,pending,items,build_status,last_error,checked_at}; build_status is cached; checked_at is Unix time.",
         "jobs": "Durable jobs with queued/running/complete/failed/interrupted status. A process exit does not authorize deployment."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -582,7 +636,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "training data",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -595,7 +652,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "training sets",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -611,7 +671,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "training sets",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "DELETE",
@@ -626,7 +689,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "{set_id}",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -643,7 +709,10 @@
       "category": "AI models and training",
       "authentication": "Bearer token",
       "name": "rename",
-      "permission": "ai.train"
+      "permission": "ai.train",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "POST",
@@ -666,7 +735,10 @@
       "authentication": "Bearer token",
       "name": "upload",
       "permission": "ai.train",
-      "description": "Multipart image intake. Optional capture_key provides idempotency. A matching key with different bytes is rejected. Response record includes original_sha256. Deleted captures cannot be reimported under their recorded identity."
+      "description": "Multipart image intake. Optional capture_key provides idempotency. A matching key with different bytes is rejected. Response record includes original_sha256. Deleted captures cannot be reimported under their recorded identity.",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "method": "GET",
@@ -6505,6 +6577,9 @@
       "errors": {
         "409": "Stale revision.",
         "400": "Invalid transition or unconfirmed negative image."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -6524,6 +6599,9 @@
       "response_schema": {
         "ok": "boolean",
         "revisions": "Saved annotation/workflow revisions in revision order; deletion markers may appear."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -6541,6 +6619,9 @@
       "response_schema": {
         "ok": "boolean",
         "datasets": "Recent frozen dataset manifests with IDs, counts, class distributions, item revisions, checksums and test_available."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     },
     {
@@ -6566,7 +6647,10 @@
         "ok": "boolean",
         "dataset": "Frozen dataset manifest."
       },
-      "description": "Requires independent train and validation capture groups. Images from one camera/day cannot cross splits. Identical content cannot cross splits. This action does not start training."
+      "description": "Requires independent train and validation capture groups. Images from one camera/day cannot cross splits. Identical content cannot cross splits. This action does not start training.",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "mqtt": [],
@@ -6597,7 +6681,10 @@
         "ok": "boolean",
         "job": "{id,name,status,created_at,updated_at,meta}; meta includes dataset_id and deployment:not_approved."
       },
-      "description": "Manually initiates training, validation and available independent-test evaluation, checked ONNX export, and optionally calibration/HEF compilation. Requires acknowledged annotation transfers and no active heavy job. Produces a candidate only; hardware acceptance and deployment remain separate."
+      "description": "Manually initiates training, validation and available independent-test evaluation, checked ONNX export, and optionally calibration/HEF compilation. Requires acknowledged annotation transfers and no active heavy job. Produces a candidate only; hardware acceptance and deployment remain separate.",
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
+      }
     },
     {
       "mqtt": [],
@@ -6616,6 +6703,9 @@
         "jobs": "Recent durable jobs.",
         "models": "Model artifacts and build_report where available.",
         "capabilities": "Detected tool capabilities; availability alone is not a successful build."
+      },
+      "product_authentication": {
+        "rdk9180p": "Appliance browser session with ai.train permission; CSRF required for POST and DELETE. Managed bearer access unavailable."
       }
     }
   ],
@@ -8689,6 +8779,32 @@
         "meaning": "Hardware capability not installed"
       },
       "mqtt": "The initial secure broker is loopback-only with private per-system credentials. Remote MQTT access, external forwarding and command connections require explicit commissioning. No external destinations or actuator commands are enabled initially."
+    },
+    "rdk9180p": {
+      "name": "EyeQ RDK9180P",
+      "system": "EyeQ Spectrum Systems",
+      "training": {
+        "available": true,
+        "authentication": "Appliance browser session with ai.train permission. Mutating requests also require X-RadiusVision-CSRF matching the session CSRF cookie. Managed bearer access to trainer routes is unavailable on this product profile.",
+        "ui": "/hailo-trainer/",
+        "api_prefix": "/hailo-trainer-api/",
+        "capabilities": [
+          "camera capture",
+          "image upload",
+          "browser harvest",
+          "touch annotation",
+          "revision history",
+          "review",
+          "approved dataset releases",
+          "durable AIBox synchronization",
+          "manual AIBox model builds",
+          "AIBox pre-label proposals"
+        ],
+        "accelerator": "Optional Hailo-8. Annotation, remote pre-label proposals and remote model builds do not require this hardware. HEF use requires compatible installed hardware and separate validation.",
+        "activation": "Candidate models never activate automatically.",
+        "offline": "Local annotation remains available. Durable transfers retry; new central builds require acknowledged annotation transfers. AIBox inference proposals and model builds are unavailable while the build service is unreachable.",
+        "recovery": "Automatic workspace rollback is unavailable. Recovery must reconcile revisions, deletion tombstones and pending transfers."
+      }
     }
   }
 }
