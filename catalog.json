@@ -1,7 +1,7 @@
 {
   "title": "EyeQ API and MQTT",
   "system": "EyeQ Spectrum Systems",
-  "edition": "2026-11-11",
+  "edition": "2026-11-22",
   "https": [
     {
       "method": "GET",
@@ -8408,6 +8408,35 @@
       "custom_fields.bathroom_gate_access": "Yes after removing whitespace and comparing case-insensitively; otherwise No. Missing or changed values replace previous imported labels; existing access is unaffected.",
       "custom_fields.storeganise_customer_status": "Source classification: current_customer, historical_customer, staff, test, inactive or active_account (occupancy unknown). Not controller enablement or permission.",
       "unit_numbers": "For imported profiles, currently occupied site units only. Historical customers remain visible; no PIN or membership changes."
+    }
+  },
+  "product_profiles": {
+    "eyeq-spectrum-intel": {
+      "name": "EyeQ Spectrum Intel",
+      "system": "EyeQ Spectrum Systems",
+      "commissioning": "Camera, Spectrum, remote access and notification integrations require configuration and verification on the installed system. Available API and MQTT operations remain subject to their existing permissions and device capabilities.",
+      "power": {
+        "provider": "victron-vedirect",
+        "transport": "USB VE.Direct",
+        "read_only": true,
+        "battery_current": "Controller charge current; not net battery discharge current",
+        "state_of_charge": "Unavailable without a suitable battery monitor",
+        "remaining_runtime": "Unavailable without suitable battery measurements"
+      },
+      "not_installed": [
+        "USB relay outputs",
+        "Strobe outputs",
+        "ZensorNet gateway and wireless keypad",
+        "TDK-Lambda DUSH960",
+        "Hailo accelerator and local model trainer",
+        "DXP front panel, fan controls and storage-builder actions",
+        "Door controllers"
+      ],
+      "hardware_control_error": {
+        "status": 409,
+        "meaning": "Hardware capability not installed"
+      },
+      "mqtt": "The initial secure broker is loopback-only with private per-system credentials. Remote MQTT access, external forwarding and command connections require explicit commissioning. No external destinations or actuator commands are enabled initially."
     }
   }
 }
