@@ -284,7 +284,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "harvest"
+      "name": "harvest",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -296,7 +297,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "health"
+      "name": "health",
+      "permission": "ai.train"
     },
     {
       "method": "DELETE",
@@ -310,7 +312,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "{image_id}"
+      "name": "{image_id}",
+      "permission": "ai.train"
     },
     {
       "method": "DELETE",
@@ -324,7 +327,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "annotations"
+      "name": "annotations",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -338,7 +342,13 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "annotations"
+      "name": "annotations",
+      "permission": "ai.train",
+      "response_schema": {
+        "revision": "Integer concurrency token; 0 means no draft exists.",
+        "state": "unannotated | draft | in_review | approved | rejected",
+        "boxes": "Current saved boxes."
+      }
     },
     {
       "method": "POST",
@@ -349,14 +359,34 @@
         "image_id",
         "boxes",
         "split",
+        "training_sets",
         "training_set_ids",
-        "training_sets"
+        "expected_revision",
+        "negative_confirmed",
+        "notes"
       ],
       "actions": [],
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "annotations"
+      "name": "annotations",
+      "permission": "ai.train",
+      "request_schema": {
+        "expected_revision": "Required integer: 0 for the first draft, otherwise the revision returned by GET.",
+        "boxes": "Array of {class_id:integer,label:string,x:number,y:number,w:number,h:number}; normalized center coordinates, positive size, fully inside image; class and label must agree.",
+        "split": "train | val | test",
+        "negative_confirmed": "Boolean; required true for submitting an image without target objects.",
+        "training_sets": "Array of existing training-set IDs. Saving changes state to draft and revokes approval.",
+        "notes": "Optional string, up to 4000 characters."
+      },
+      "response_schema": {
+        "ok": "boolean",
+        "annotation": "{image_id,revision,state,boxes,split,training_sets,negative_confirmed,notes,updated_at}"
+      },
+      "errors": {
+        "409": "Stale/missing revision; reload and explicitly reconcile edits.",
+        "400": "Invalid annotation."
+      }
     },
     {
       "method": "GET",
@@ -370,7 +400,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "file"
+      "name": "file",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -386,7 +417,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "infer"
+      "name": "infer",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -400,13 +432,14 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "thumbnail"
+      "name": "thumbnail",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
       "path": "/hailo-trainer-api/images/{image_id}/training-sets",
       "mqtt": [],
-      "available": true,
+      "available": false,
       "fields": [
         "image_id",
         "training_set_ids",
@@ -416,7 +449,9 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "training sets"
+      "name": "training sets",
+      "permission": "ai.train",
+      "description": "Use the annotation editor/save endpoint with expected_revision to change membership as a new draft."
     },
     {
       "method": "POST",
@@ -430,7 +465,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "{job_type}"
+      "name": "{job_type}",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -442,7 +478,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "models"
+      "name": "models",
+      "permission": "ai.train"
     },
     {
       "method": "DELETE",
@@ -456,7 +493,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "{model_id}"
+      "name": "{model_id}",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -470,7 +508,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "metadata"
+      "name": "metadata",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -485,7 +524,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "rename"
+      "name": "rename",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -497,7 +537,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "settings"
+      "name": "settings",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -509,7 +550,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "settings"
+      "name": "settings",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -521,7 +563,13 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "state"
+      "name": "state",
+      "permission": "ai.train",
+      "response_schema": {
+        "workflow": "{states,datasets,audit_identity}",
+        "remote": "{enabled,destination,pending,items,build_status,last_error,checked_at}; build_status is cached; checked_at is Unix time.",
+        "jobs": "Durable jobs with queued/running/complete/failed/interrupted status. A process exit does not authorize deployment."
+      }
     },
     {
       "method": "GET",
@@ -533,7 +581,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "training data"
+      "name": "training data",
+      "permission": "ai.train"
     },
     {
       "method": "GET",
@@ -545,7 +594,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "training sets"
+      "name": "training sets",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -560,7 +610,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "training sets"
+      "name": "training sets",
+      "permission": "ai.train"
     },
     {
       "method": "DELETE",
@@ -574,7 +625,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "{set_id}"
+      "name": "{set_id}",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -590,7 +642,8 @@
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "rename"
+      "name": "rename",
+      "permission": "ai.train"
     },
     {
       "method": "POST",
@@ -598,18 +651,22 @@
       "mqtt": [],
       "available": true,
       "fields": [
-        "image",
-        "source",
         "camera_id",
-        "source_label",
+        "capture_key",
+        "capture_reason",
         "captured_at",
-        "resolution"
+        "image",
+        "resolution",
+        "source",
+        "source_label"
       ],
       "actions": [],
       "scope": "ai6:models",
       "category": "AI models and training",
       "authentication": "Bearer token",
-      "name": "upload"
+      "name": "upload",
+      "permission": "ai.train",
+      "description": "Multipart image intake. Optional capture_key provides idempotency. A matching key with different bytes is rejected. Response record includes original_sha256. Deleted captures cannot be reimported under their recorded identity."
     },
     {
       "method": "GET",
@@ -3631,7 +3688,12 @@
           "position_ms",
           "ts_ms"
         ],
-        "send-frame-to-trainer": [],
+        "send-frame-to-trainer": [
+          "cameraId",
+          "positionMs",
+          "sourceLabel",
+          "resolution"
+        ],
         "save-control-unit": [],
         "save-device-telemetry-config": [],
         "discover-control-units": [],
@@ -3663,6 +3725,14 @@
         },
         "response": "ok, weatherflow (saved settings, configured, model, transport), message",
         "rules": "Settings replace the integration configuration atomically. Boolean enabled is required; all identity fields must be valid. Unknown fields are rejected. Changes apply within 30 seconds. Disabling stops new ingestion and removes the hub broadcast allowance, preserving history and pending event delivery. One commissioned WeatherFlow Tempest hub per EyeQ Spectrum System."
+      },
+      "action_response_schema": {
+        "send-frame-to-trainer": {
+          "queued": "true means durable local capture pending trainer receipt, not delivered.",
+          "captureId": "Stable capture-transfer identity.",
+          "record": "Trainer intake receipt when acknowledged.",
+          "trainerUrl": "Annotation link when the trainer has accepted the image."
+        }
       }
     },
     {
@@ -6400,6 +6470,153 @@
         "source_row (when observed)",
         "fault_code"
       ]
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [
+        "submit",
+        "approve",
+        "reject",
+        "reopen"
+      ],
+      "method": "POST",
+      "path": "/hailo-trainer-api/images/{image_id}/review",
+      "name": "Review annotation",
+      "fields": [
+        "image_id",
+        "action",
+        "expected_revision",
+        "note"
+      ],
+      "request_schema": {
+        "expected_revision": "Required current integer revision.",
+        "action": "submit: draft/rejected \u2192 in_review; approve: in_review \u2192 approved; reject: in_review/approved \u2192 rejected; reopen: approved/in_review/rejected \u2192 draft.",
+        "note": "Rejection requires a nonempty reason; up to 4000 characters retained."
+      },
+      "response_schema": {
+        "ok": "boolean",
+        "annotation": "Current annotation with incremented revision and new state."
+      },
+      "errors": {
+        "409": "Stale revision.",
+        "400": "Invalid transition or unconfirmed negative image."
+      }
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [],
+      "method": "GET",
+      "path": "/hailo-trainer-api/images/{image_id}/history",
+      "name": "Annotation revision history",
+      "fields": [
+        "image_id"
+      ],
+      "response_schema": {
+        "ok": "boolean",
+        "revisions": "Saved annotation/workflow revisions in revision order; deletion markers may appear."
+      }
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [],
+      "method": "GET",
+      "path": "/hailo-trainer-api/datasets",
+      "name": "List frozen datasets",
+      "fields": [],
+      "response_schema": {
+        "ok": "boolean",
+        "datasets": "Recent frozen dataset manifests with IDs, counts, class distributions, item revisions, checksums and test_available."
+      }
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [],
+      "method": "POST",
+      "path": "/hailo-trainer-api/datasets",
+      "name": "Freeze approved dataset",
+      "fields": [
+        "training_sets",
+        "name"
+      ],
+      "request_schema": {
+        "training_sets": "Array of existing set IDs; approved annotations only.",
+        "name": "Optional display name, up to 120 characters."
+      },
+      "response_schema": {
+        "ok": "boolean",
+        "dataset": "Frozen dataset manifest."
+      },
+      "description": "Requires independent train and validation capture groups. Images from one camera/day cannot cross splits. Identical content cannot cross splits. This action does not start training."
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [],
+      "method": "POST",
+      "path": "/hailo-trainer-api/jobs/build",
+      "name": "Build reviewed model candidate",
+      "fields": [
+        "name",
+        "set_ids",
+        "base_model",
+        "epochs",
+        "compile"
+      ],
+      "request_schema": {
+        "name": "Query parameter: unique run name.",
+        "set_ids": "Query parameter: comma-separated training-set IDs.",
+        "base_model": "Optional registered checkpoint path returned by the training backend.",
+        "epochs": "Optional integer 1\u20131000; default 120.",
+        "compile": "Query parameter: true to request HEF compilation; default false."
+      },
+      "response_schema": {
+        "ok": "boolean",
+        "job": "{id,name,status,created_at,updated_at,meta}; meta includes dataset_id and deployment:not_approved."
+      },
+      "description": "Manually initiates training, validation and available independent-test evaluation, checked ONNX export, and optionally calibration/HEF compilation. Requires acknowledged annotation transfers and no active heavy job. Produces a candidate only; hardware acceptance and deployment remain separate."
+    },
+    {
+      "mqtt": [],
+      "available": true,
+      "scope": "ai6:models",
+      "permission": "ai.train",
+      "category": "AI models and training",
+      "authentication": "Bearer token",
+      "actions": [],
+      "method": "GET",
+      "path": "/hailo-trainer-api/build-status",
+      "name": "Build backend status",
+      "fields": [],
+      "response_schema": {
+        "ok": "boolean",
+        "jobs": "Recent durable jobs.",
+        "models": "Model artifacts and build_report where available.",
+        "capabilities": "Detected tool capabilities; availability alone is not a successful build."
+      }
     }
   ],
   "mqtt_operations": {
