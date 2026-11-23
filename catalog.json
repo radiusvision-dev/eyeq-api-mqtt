@@ -3431,7 +3431,8 @@
         }
       },
       "weatherflow": "Current WeatherFlow Tempest configuration and enabled/configured state, model and local-udp transport. Source IP, serials, MAC and receiving interface are visible with vision.view. siteTelemetry.health.tempest_local supplies observation health and last packet/source timestamps. Use weather timestamps and freshness to evaluate historical observations.",
-      "persistent_history": "With the Vision history update, history=1 returns saved site events independently of the playback window: events, more, next_cursor, status, malformedSkipped, order, complete_history. limit 1\u2013100; before uses the returned cursor. Records are in recorded-descending order. Uncollected/deleted events cannot be reconstructed. This cursor does not enumerate all Spectrum recorded analytics; those remain part of timeline queries."
+      "persistent_history": "With the Vision history update, history=1 returns saved site events independently of the playback window: events, more, next_cursor, status, malformedSkipped, order, complete_history. limit 1\u2013100; before uses the returned cursor. Records are in recorded-descending order. Uncollected/deleted events cannot be reconstructed. This cursor does not enumerate all Spectrum recorded analytics; those remain part of timeline queries.",
+      "audio_output_availability": "Assigned speaker-only or audio-only devices are included in sources.cameras even without a video URL. Bind Audio Playout by its stable source id; speakerOnly/audioOnly and audioOutputEnabled identify an output device, while audioInputEnabled can remain false. Empty, unassigned channels are excluded."
     },
     {
       "method": "POST",
@@ -8198,14 +8199,48 @@
       "meter-directory",
       "meter-history",
       "access-history",
-      "site-events"
+      "site-events",
+      "ptz-controls",
+      "audio-playout"
     ],
     "layout": "Independent items in layout.canvas.items; normal position, dimensions and settings apply.",
     "permissions": {
       "view": "vision.view",
       "edit": "vision.manage"
     },
-    "history": "Meter and access widgets follow the shared Vision playhead. Existing site-meters items remain supported."
+    "history": "Meter and access widgets follow the shared Vision playhead. Existing site-meters items remain supported.",
+    "audio_output_sources": {
+      "availability": "Assigned speaker-only or audio-only devices are included in sources.cameras even without a video URL. Bind Audio Playout by its stable source id; speakerOnly/audioOnly and audioOutputEnabled identify an output device, while audioInputEnabled can remain false. Empty, unassigned channels are excluded.",
+      "read_only_refresh": {
+        "action": "camera-control",
+        "command": "speaker_refresh",
+        "channel": 5
+      },
+      "playback": {
+        "action": "camera-control",
+        "command": "speaker_play_clip",
+        "channel": 5,
+        "clip": "42",
+        "volume": 20
+      },
+      "volume": "0\u2013100 percent; applied only by an explicit playback request and only when the target advertises volume support. Refresh discovers the device recordings and capabilities.",
+      "control_permission": "vision.control"
+    },
+    "humon_operator_view": {
+      "path": "/appliance/eyeq-humon/live",
+      "default_layout": "Saved browser-default Vision preset",
+      "controls": "Camera, radar, telemetry and audio-output widgets use their saved source bindings.",
+      "permissions": {
+        "view": [
+          "vision.view",
+          "humon.view"
+        ],
+        "operate": "vision.control",
+        "edit": "vision.manage",
+        "monitoring_changes": "humon.manage"
+      },
+      "deployment": "Monitoring activation requires an authorized explicit action. Preparing a dashboard does not arm monitoring or start Spectrum recording."
+    }
   },
   "browser_access_control": {
     "authentication": "Authenticated browser session with a trusted principal type, issuer and subject; request-body identities are never accepted.",
