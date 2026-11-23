@@ -1577,7 +1577,8 @@
       "permission": "pacs.doors.operate",
       "actions": [
         "unlock",
-        "lock"
+        "lock",
+        "hold_open"
       ],
       "fields": [
         "controller_id",
@@ -1588,13 +1589,22 @@
         "expires_at",
         "confirm",
         "duration_seconds",
-        "person_id"
+        "person_id",
+        "hold_seconds"
       ],
       "unlock_duration": "Exact advertised configured_access_seconds (1\u201330 or 60), or a 1\u201330 second override when supported. Shelly Gen3 maglock profile requires exactly 7 seconds.",
       "scope": "ai6:control",
       "category": "Access Control",
       "authentication": "Bearer token",
-      "name": "commands"
+      "name": "commands",
+      "timed_hold": {
+        "hold_seconds": "Integer 1\u20133600; required only for hold_open; do not include duration_seconds.",
+        "capability": "Requires can_hold_open=true from current door inventory. Supported commissioned Axis doors only; not Shelly.",
+        "enforcement": "EyeQ-managed persistent expiry. Automatic lock retries after outages, never automatic unlock replay. EyeQ/controller/network unavailability can extend the hold beyond hold_until.",
+        "early_end": "Use existing action lock with fresh request_id, timestamps and current binding_revision.",
+        "status": "Door state includes hold; command status includes hold for the original request. hold_state: dispatching, active, uncertain, release_overdue, ended, cancelled.",
+        "overlap": "New hold_open and unlock rejected with 409 while a hold obligation remains active."
+      }
     },
     {
       "method": "GET",
@@ -7487,7 +7497,8 @@
       ],
       "actions": [
         "unlock",
-        "lock"
+        "lock",
+        "hold_open"
       ],
       "sensitive_result": false
     },
@@ -8806,5 +8817,29 @@
         "recovery": "Automatic workspace rollback is unavailable. Recovery must reconcile revisions, deletion tombstones and pending transfers."
       }
     }
+  },
+  "timed_door_hold": {
+    "inventory_fields": [
+      "can_hold_open",
+      "max_hold_seconds",
+      "hold_timer_enforcement"
+    ],
+    "result_fields": [
+      "hold_id",
+      "hold_seconds",
+      "hold_until",
+      "timer_enforcement"
+    ],
+    "state_fields": [
+      "hold_id",
+      "hold_until",
+      "hold_state",
+      "timer_enforcement",
+      "overdue",
+      "release_error",
+      "ended_at"
+    ],
+    "hold_until": "Unix seconds, deadline for ending the hold signal, not proof of physical closure.",
+    "events": "access.door.command actions hold_open and hold_release. hold_release status acknowledged or release_overdue; includes hold_id and hold_until. Existing access audit forwarding scope applies."
   }
 }
