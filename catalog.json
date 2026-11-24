@@ -1598,7 +1598,7 @@
       "authentication": "Bearer token",
       "name": "commands",
       "timed_hold": {
-        "hold_seconds": "Integer 1\u20133600; required only for hold_open; do not include duration_seconds.",
+        "hold_seconds": "Integer 1\u201386400; required only for hold_open; do not include duration_seconds.",
         "capability": "Requires can_hold_open=true from current door inventory. Supported commissioned Axis doors only; not Shelly.",
         "enforcement": "EyeQ-managed persistent expiry. Automatic lock retries after outages, never automatic unlock replay. EyeQ/controller/network unavailability can extend the hold beyond hold_until.",
         "early_end": "Use existing action lock with fresh request_id, timestamps and current binding_revision.",
