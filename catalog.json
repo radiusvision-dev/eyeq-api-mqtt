@@ -8841,5 +8841,22 @@
     ],
     "hold_until": "Unix seconds, deadline for ending the hold signal, not proof of physical closure.",
     "events": "access.door.command actions hold_open and hold_release. hold_release status acknowledged or release_overdue; includes hold_id and hold_until. Existing access audit forwarding scope applies."
+  },
+  "snapshot_reliability": {
+    "live_endpoint": "GET /av-manager-api/snapshot?channel={channel}",
+    "scope": "ai6:av",
+    "success": "HTTP 200 image/jpeg with actual camera JPEG bytes",
+    "placeholder": "HTTP 200 image/svg+xml is unavailable camera imagery, not success for an image consumer",
+    "cache_seconds": 1,
+    "axis_default_snapshot": {
+      "resolution": "640x480",
+      "compression": 50,
+      "preserves_explicit_source_parameters": true,
+      "preserves_sensor_selection": true
+    },
+    "archive_endpoint": "GET /appliance-api/eyeq-vision/playback-frame/{camera_id}.jpg?pos={unix_milliseconds}",
+    "archive_semantics": "First available JPEG in the requested short media segment; no exact timestamp or nearest-frame search guarantee",
+    "restart_semantics": "Overall ok includes stream warm-up; publisher.ok alone confirms only the publisher restart",
+    "axis_fallback": "Live JPEG from the uniquely matched Spectrum ONVIF channel; ambiguous mappings and offline resources rejected"
   }
 }
