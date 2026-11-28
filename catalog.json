@@ -8858,5 +8858,18 @@
     "archive_semantics": "First available JPEG in the requested short media segment; no exact timestamp or nearest-frame search guarantee",
     "restart_semantics": "Overall ok includes stream warm-up; publisher.ok alone confirms only the publisher restart",
     "axis_fallback": "Live JPEG from the uniquely matched Spectrum ONVIF channel; ambiguous mappings and offline resources rejected"
+  },
+  "inference_memory_health": {
+    "status_endpoint": "GET /workload-governor-api/status",
+    "inference_permission": "effective.allowRealInference",
+    "memory_fields": {
+      "availableBytes": "Usable memory in bytes",
+      "usedPercent": "Used memory percentage; not inference permission",
+      "pressure.available": "Whether Linux memory pressure measurements are available",
+      "pressure.someAvg10": "Percent of time some workloads stalled for memory, trailing ten seconds",
+      "pressure.fullAvg10": "Percent of time all non-idle workloads stalled for memory, trailing ten seconds"
+    },
+    "recent_agents": "samples.hailoAgents.agents is limited to 256 recent status files; not a lifetime inventory",
+    "history": "Operational events and retention unchanged. Live agent aggregate counters can change as agents retire."
   }
 }
